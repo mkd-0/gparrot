@@ -1,0 +1,101 @@
+{% extends "base.html.twig" %}
+
+{% block title %}VParrot
+{% endblock %}
+
+{% block body %}
+
+
+<div class="container-fluid">
+  <!-- Description -->
+  <div class="row  mt-4 w-75 mx-auto">
+    <h1 class="text-center">Nos occasions ({{cars|length}})</h1> 
+    <p>Plus de 2000 voitures en stocks, révisées et garanties. </br>
+      Choisissez parmi tous nos modèles.
+    </p>  
+  </div>
+  <!-- End Description -->
+
+  <!-- Filtre -->
+  <div class="slider-range">
+    <div class="slidecontainer d-flex justify-content-center ">
+      <div class="px-5">
+      <p>Prix min :</p>
+      <input type="range" id="slider-range-price-value1" min="100" max="25000" value="100">
+      <p>Prix max :</p>
+      <input type="range" id="slider-range-price-value2" min="100" max="35000" value="35000">
+    </div>
+    <div class="px-5">
+      <p>Kilomètre min :</p>
+      <input type="range" id="slider-range-mileage-value1" min="0" max="100000" value="0">
+      <p>Kilomètre max :</p>
+      <input type="range" id="slider-range-mileage-value2" min="0" max="100000" value="100000">
+    </div>
+
+    <div class="px-5">
+      <p>Année min :</p>
+      <input type="range" id="slider-range-year-value1" min="2010" max="2024" value="2010">
+      <p>Année max :</p>
+      <input type="range" id="slider-range-year-value2" min="2010" max="2024" value="2024">
+    </div>
+      
+    </div>
+</div>
+<!-- Mileage --> 
+   
+<!-- Year --> 
+ 
+
+  </div>
+
+ 
+  </div>
+      
+  <div id="filteredAds" class="container">
+          <!-- Les annonces filtrées seront affichées ici -->
+      
+
+  </div>
+
+
+  <!-- End Filtre  display none -->
+
+
+  <!-- Card -->
+  <div class="container d-flex">
+    <div class="row row-cols-xs1 row-cols-sm-3">
+      
+      {% for car in cars %}
+          <div class="card mx-5 my-5 p-0" id="car-{{car.id}}" style="width:25%;">
+            {% if car.imageName %}
+            <img src="{{vich_uploader_asset(car, 'imageFile') }}" alt="Image de la voiture" class="card-img-top" style="height: 250px;">
+            {% else %}
+            <img src="{{ asset('img/voiture0.jpg') }}" alt="pas d'image" class="card-img-top" style="height: 250px;">
+            {% endif %}
+
+            
+            
+            <div class="card-body">
+              <h5 class="card-title my-1">{{car.brand}} {{car.model}}</h5>
+              <p class="card-text my-1">{{car.energy}}</p>
+              <p class="card-text my-1">Année : {{car.year}}</p>
+              <p class="card-text my-1">{{car.mileage}} km</p>
+              <p class="card-text my-1">{{car.price}} €</p>
+              <a href="{{ path('app_car_show', {'id': car.id}) }}" class="btn btn-danger d-flex justify-content-center">Détail</a>
+                      
+            </div>
+          </div>
+      {% endfor %}
+    </div>
+  </div>
+  <!-- End Card -->
+</div>
+
+
+
+
+
+
+{% endblock %}
+
+

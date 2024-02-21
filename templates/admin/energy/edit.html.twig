@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Energy{% endblock %}
+
+{% block body %}
+    <h1 class="ms-5">Modifier l'énergie</h1>
+
+    {{ include('admin/energy/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+
+    <a href="{{ path('app_energy_list') }}"  class="btn btn-secondary mb-5 ms-5 ">Retour</a>
+
+    {{ include('admin/energy/_delete_form.html.twig') }}
+{% endblock %}

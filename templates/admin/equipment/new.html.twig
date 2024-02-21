@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Equipement{% endblock %}
+
+{% block body %}
+    <h1 class="ms-5">Ajouter un équipement</h1>
+
+    {{ include('admin/equipment/_form.html.twig') }}
+
+    <a href="{{ path('app_equipment_list') }}" class="btn btn-secondary my-2 mx-5">Retour</a>
+{% endblock %}

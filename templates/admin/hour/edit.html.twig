@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Horaires{% endblock %}
+
+{% block body %}
+    <h1 class="ms-5">Modifier les horaires</h1>
+
+   
+    {{ include('admin/energy/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+
+    <a href="{{ path('app_hour_list') }}"  class="btn btn-secondary mb-5 ms-5 ">Retour</a>
+
+    {{ include('admin/hour/_delete_form.html.twig') }}
+{% endblock %}

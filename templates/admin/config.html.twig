@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}Garage Parrot{% endblock %}
+
+{% block body %}
+
+<main>
+  <div class="container-fluid ms-3 mb-5">
+    <h1 class="">Panneau d'administration</h1>
+
+    <div class="d-flex">
+      {% if is_granted('ROLE_ADMIN') %}
+      <div class="row mx-3" style="width: 150px;">
+        <div class="card p-0">
+          <h5 class="card-header">Utilisateurs</h5>
+          <div class="card-body">
+            <a class="nav-link" href="{{path('app_user_index')}}">Liste</a>
+            <a class="nav-link" href="{{path('app_register')}}">Créer</a>
+          </div>
+        </div>
+      </div>
+
+      {% endif %}    
+      <div class="row mx-3" style="width: 150px;">
+        <div class="card p-0">
+          <h5 class="card-header">Véhicules</h5>
+          <div class="card-body">
+            <a class="nav-link" href="{{path('app_car_list')}}">Liste</a>
+            <a class="nav-link" href="{{path('app_car_new')}}">Créer</a>      
+          </div>
+        </div>
+      </div>
+      
+      
+      <div class="row mx-3" style="width: 150px;">
+        <div class="card p-0">
+          <h5 class="card-header">Marque</h5>
+          <div class="card-body">
+            <a class="nav-link" href="{{path('app_brand_list')}}">Liste</a>
+            <a class="nav-link" href="{{path('app_brand_new')}}">Créer</a>      
+          </div>
+        </div>
+      </div>
+
+      <div class="row mx-3" style="width: 150px;">
+        <div class="card p-0">
+          <h5 class="card-header">Modèle</h5>
+          <div class="card-body">
+            <a class="nav-link" href="{{path('app_model_list')}}">Liste</a>
+            <a class="nav-link" href="{{path('app_model_new')}}">Créer</a>      
+          </div>
+        </div>
+      </div>
+
+      <div class="row mx-3" style="width: 150px;">
+        <div class="card p-0">
+          <h5 class="card-header">Couleurs</h5>
+          <div class="card-body">
+            <a class="nav-link" href="{{path('app_color_list')}}">Liste</a>
+            <a class="nav-link" href="{{path('app_color_new')}}">Créer</a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row mx-3" style="width: 150px;">
+        <div class="card p-0">
+          <h5 class="card-header">Energie</h5>
+          <div class="card-body">
+            <a class="nav-link" href="{{path('app_energy_list')}}">Liste</a>
+            <a class="nav-link" href="{{path('app_color_list')}}">Créer</a>
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="row mx-3" style="width: 150px;">
+        <div class="card p-0">
+          <h5 class="card-header">Année</h5>
+          <div class="card-body">
+            <a class="nav-link" href="{{path('app_year_list')}}">Liste</a>
+            <a class="nav-link" href="{{path('app_year_new')}}">Créer</a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row mx-3" style="width: 150px;">
+        <div class="card p-0">
+          <h5 class="card-header">Equipement</h5>
+          <div class="card-body">
+            <a class="nav-link" href="{{path('app_equipment_list')}}">Liste</a>
+            <a class="nav-link" href="{{path('app_equipment_new')}}">Créer</a>
+          </div>
+        </div>
+      </div>
+
+
+      {% if is_granted('ROLE_ADMIN') %}
+      <div class="row mx-3" style="width: 150px;">
+        <div class="card p-0">
+          <h5 class="card-header">Horaires</h5>
+          <div class="card-body">
+            <a class="nav-link" href="{{path('app_hour_list')}}">Liste</a>
+            <a class="nav-link" href="{{path('app_hour_new')}}">Créer</a>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      
+
+
+
+      <div class="row mx-3" style="width: 150px;">
+        <div class="card p-0">
+          <h5 class="card-header">Services</h5>
+          <div class="card-body">
+            <a class="nav-link" href="{{path('app_service_list')}}">Liste</a>
+            <a class="nav-link" href="{{path('app_service_new')}}">Créer</a>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+<!-- Section 
+ -->
+  </div>
+</main>         
+{% endblock %}

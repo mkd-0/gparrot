@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Couleurs{% endblock %}
+
+{% block body %}
+    <h1 class="ms-5">Modifier la couleur</h1>
+
+    {{ include('admin/color/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+
+    <a href="{{ path('app_color_list') }}" class="btn btn-secondary mb-5 ms-5 ">Retour</a>
+    
+   
+
+    {{ include('admin/color/_delete_form.html.twig') }}
+{% endblock %}

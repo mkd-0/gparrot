@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Equipment index{% endblock %}
+
+{% block body %}
+    <h1 class="px-5">Liste des équipements</h1>
+
+    <div class="w-75 ms-5">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>Nom</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for equipment in equipment %}
+                <tr>
+                    <td>{{ equipment.id }}</td>
+                    <td>{{ equipment.name }}</td>
+                    <td>
+                        <a href="{{ path('app_equipment_show', {'id': equipment.id}) }}" class="btn btn-info">Voir</a>
+                        <a href="{{ path('app_equipment_edit', {'id': equipment.id}) }}" class="btn btn-warning">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucune données</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="{{ path('app_equipment_new') }}" class="btn btn-primary mb-5 mx-5" >Ajouter</a>
+    <a href="{{ path('app_config') }}" class="btn btn-secondary  mb-5 mx-5">Retour</a>
+{% endblock %}

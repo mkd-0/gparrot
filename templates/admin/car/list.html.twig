@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Véhicule{% endblock %}
+
+{% block body %}
+    <h1 class="px-5">Liste des voitures</h1>
+    <div class="ms-5 w-75 " >   
+        <table class="table mx-2">
+            <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>Marque</th>
+                    <th>Modèle</th>
+                    <th>Kilométrage</th>
+                    <th>Puissance</th>
+                    <th>Année</th>
+                    <th>Date de circulation</th>
+                    <th>Prix</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for car in cars %}
+                <tr>
+                    <td>{{ car.id }}</td>
+                    <td>{{ car.Brand }}</td>
+                    <td>{{ car.Model }}</td>
+                    <td>{{ car.Mileage }} km</td>
+                    <td>{{ car.Power }} CV</td>
+                    <td>{{ car.Year }}</td>
+                    
+                    <td>{{ car.DateCirculation ? car.DateCirculation|date('d-m-Y') : '' }}</td>
+                    <td>{{ car.Price }} €</td>
+                    <td>
+                        <a href="{{ path('app_car_show', {'id': car.id}) }}" class="btn btn-info">Voir</a>
+                        <a href="{{ path('app_car_edit', {'id': car.id}) }}" class="btn btn-warning">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">Aucune données</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a href="{{ path('app_car_new') }}" class="btn btn-primary mb-5 mx-5" >Ajouter</a>
+    <a href="{{ path('app_config') }}" class="btn btn-secondary  mb-5 mx-5">Retour</a>
+{% endblock %}

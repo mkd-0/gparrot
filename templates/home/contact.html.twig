@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block title %}VParrot
+{% endblock %}
+
+{% block body %}
+<div class="wrapper">
+    <form action="">
+      <div class="form-group">
+        <label>Price</label>
+        <div class="zp-double-range">
+          <div class="zp-range-track"></div>
+          <input type="range" name="price-min" id="price-min" min="0" max="100" value="0" />
+          <input type="range" name="price-max" id="price-max" min="0" max="100" value="100" />
+          <div class="values">
+            <div class="min-val">
+              <span class="counter">15</span><span> $</span>
+            </div>
+            <div class="max-val">
+              <span class="counter">100</span><span> $</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Mileage</label>
+        <div class="zp-double-range">
+          <div class="zp-range-track"></div>
+          <input type="range" name="price-min" id="price-min" min="0" max="100" value="0" />
+          <input type="range" name="price-max" id="price-max" min="0" max="100" value="100" />
+          <div class="values">
+            <div class="min-val">
+              <span class="counter">15</span><span> KM</span>
+            </div>
+            <div class="max-val">
+              <span class="counter">100</span> KM<span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+{% endblock %}

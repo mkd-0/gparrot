@@ -1,0 +1,221 @@
+{% extends "base.html.twig" %}
+
+
+{% block title %}VParrot{% endblock %}
+
+
+{% block body %}
+<div class="container-fluid px-0" >
+  <!-- Content -->
+  <!-- Image -->
+  <div class="row  ">
+    <img src="{{ asset('img/section1img.png') }}" alt="Description de l'image" class="img-fluid">
+  </div>
+
+
+  <!-- Description -->
+  <div class="row  mt-4 w-75 mx-auto">
+    <h1 class="text-center">Présentation du garage</h1> 
+    <p>Vincent Parrot, fort de ses 15 années d'expérience dans la réparation automobile,
+      a ouvert son propre garage à Toulouse en 2021. 
+     Nous proposons une large gamme de services: réparation de la carrosserie et de la mécanique  des voitures ainsi que leur entretien régulier pour garantir leur performance et leur sécurité. 
+     
+    Nous mettons également en vente des véhicules d'occasion en parfait état, révisés et garantis.
+    </p>  
+  </div>
+  <!-- End Description -->
+
+
+    <!-- Section Service -->
+    <div class="row mt-5 bg-light">     
+      <div class="section1 mb-5">
+          <!-- Title -->
+        <div class="row d-flex row text-center my-5 ">
+          <h2>Nos services</h2> 
+        </div>
+      </div>
+  
+        <!-- Cards -->
+        <div class="container d-flex justify-content-center">
+          <div class="row row-cols-xs1 row-cols-sm-3 my-5">
+            {% for service in services %}
+        
+          <!-- Card mechanic -->
+            <div class="card mx-5 mb-5 p-0" style="width: 30rem;">
+              <img src="{{vich_uploader_asset(service, 'imageFile') }}"  class="card-img-top" style="height: 300px;" alt="service mécanique.">
+              <div class="card-body">
+                <h2 class="card-text my-1">{{service.title}}</h2>  
+                <p class="card-text">{{service.Description}}.</p>
+              </div>
+            </div>
+          {% endfor %}
+          </div>
+        </div>
+    </div>
+        <!-- End Cards -->
+</div>
+
+    <!-- End Service -->
+  
+  <!-- Section Avantage -->
+  <div class="section2 bg-danger text-white py-5">
+    <!-- Title -->
+    <div class="row d-flex row text-center mb-5">
+      <h2>Notre priorité votre confiance</h2> 
+    </div>
+    
+    <!-- Avantages -->
+    <div class="row d-flex mb-2 mx-auto"> 
+      <!-- Row     -->
+      <div class="row d-flex mb-2"> 
+        <!-- Col1     -->
+        <div class="col-md-6">  
+            <p class="mx-5 mx-md-5 text-md-left">
+                <i class="bi bi-credit-card-2-back mx-2"></i> Payez en toute sérénité et à votre rythme : CB, 4x sans frais.
+            </p>
+        </div>
+    
+        <!-- Col2     -->
+        <div class="col-md-6">  
+          <p class="mx-5 mx-md-5 text-md-left">
+              <i class="bi bi-car-front mx-2"></i> Des centaines de voitures d’occasion,
+              vous trouverez forcément la votre
+          </p>
+        </div>
+      </div>  
+    </div>
+
+
+    <div class="row d-flex mb-2 mx-auto"> 
+      <!-- Row   -->
+      <div class="row d-flex mb-2"> 
+        <!-- Col1     -->
+        <div class="col-md-6">  
+            <p class="mx-5 mx-md-5 text-md-left">
+              <i class="bi bi-person mx-2"></i> Des conseillers disponibles avant, 
+              pendant et après votre achat, 
+              oui c'est possible !
+            </p>
+        </div>
+    
+        <!-- Col2     -->
+        <div class="col-md-6">  
+          <p class="mx-5 mx-md-5 text-md-left">
+            <i class="bi bi-emoji-frown mx-2"></i>Une panne ? 
+            Votre conseiller est là pour vous conseiller.
+          </p>
+        </div>
+      </div>  
+    </div>
+    
+
+    <div class="row d-flex mb-2 mx-auto"> 
+      <!-- Row    -->
+      <div class="row d-flex mb-2"> 
+        <!-- Col1     -->
+        <div class="col-md-6">  
+            <p class="mx-5 mx-md-5 text-md-left">
+              <i class="bi bi-clock mx-2"></i>Parce que vous avez besoin de votre voiture,
+            nous respecterons les délais.
+            </p>
+        </div>
+    
+        <!-- Col2     -->
+        <div class="col-md-6">  
+          <p class="mx-5 mx-md-5 text-md-left">
+            <i class="bi bi-star mx-2"></i>Un service 5é étoiles pour votre véhicule, 
+            c’est le minimum que l’on puisse faire.
+          </p>
+        </div>
+      </div>  
+    </div>
+    
+      <!-- Row3 -->
+
+    </div>
+
+    <!-- End Avantage -->
+
+
+ <!-- Section Testimonial -->
+ <section class="home-testimonial py-5">
+  <!-- Title -->
+
+  <div class="row d-flex justify-content-center py-5">
+    <div class="col-md-12 pt-4 d-flex justify-content-center">
+      <h2>Témoignages</h2>
+    </div>
+  </div>
+  <!-- Testimonials -->
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+
+       <!-- Testimonial 1 -->
+        <div class="col-md-4">
+          <div class="testi-desc">
+            <div class="border border-secondary-subtle text-center py-5 shadow p-3 mb-5 rounded">&ldquo;Merci pour vos conseils 
+             et votre professionnalisme&rdquo;
+              <p class="text-center mt-3">Nathalie M</p>
+            </div>                                                             
+          </div>  
+        </div>
+    
+          <!-- Testimonial 2 -->
+        <div class="col-md-4 ">
+          <div class="testi-desc">
+            <div class="border border-secondary-subtle text-center py-5 shadow p-3 mb-5 rounded">&ldquo;Travail efficace et 
+                délais respectés&rdquo;
+              <p class="text-center mt-3">Clément C</p>
+            </div>                                                             
+          </div>  
+        </div>
+
+          <!-- Testimonial 3 -->
+        <div class="col-md-4">
+          <div class="testi-desc">
+            <div class="border border-secondary-subtle text-center py-5 shadow p-3 mb-5 rounded">&ldquo;Voiture achetée et entretenue
+                      ici. Aucun soucis.&rdquo;
+              <p class="text-center mt-3">Bernard B</p>
+            </div>                                                             
+          </div>  
+        </div>
+    </div>
+    <!-- Add Testimonial  -->
+    <div class="row justify-content-start">
+      <p>Parce que votre avis compte, laissez nous le  témoignagne de votre expérience</p>
+      
+      <div class="d-grid gap-2 d-md-block">
+        <button id="btn_testimony" type="button" class="btn btn-primary">Je témoigne</button>
+      </div>
+    </div>
+
+
+        <!-- Form Testimonial  -->
+    <div id="testimony">
+        <div class="row ">
+          <div class="mb-1 pt-5">
+            <label for="name" class="form-label">Votre nom</label>
+            <input type="name" class="form-control" id="name" placeholder="Votre nom">
+          </div>
+          <div class="mb-1 py-2">
+            <label for="email" class="form-label">Votre email</label>
+            <input type="email" class="form-control" id="email" placeholder="Votre nom">
+          </div>
+          
+
+          <div class="mb-3">
+              <label for="message" class="form-label">Votre témoignage</label>
+              <textarea class="form-control" id="message" placeholder="Merci de travail" rows="3"></textarea>
+          </div>
+          <div class="d-grid gap-2 md-flex justify-content-md-center">
+            <button type="button" class="btn btn-primary">Envoyer le message</button>
+          </div>
+
+        </div>   
+    </div>
+</section>
+
+</div>
+<script src="{{ asset('js/testimony.js') }}"></script>
+
+{% endblock %}
