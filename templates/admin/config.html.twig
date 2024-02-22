@@ -8,125 +8,161 @@
 
 <main>
   <div class="container-fluid ms-3 mb-5">
+    <!-- Title page administration  -->
     <h1 class="">Panneau d'administration</h1>
 
-    <div class="d-flex">
-      {% if is_granted('ROLE_ADMIN') %}
-      <div class="row mx-3" style="width: 150px;">
-        <div class="card p-0">
-          <h5 class="card-header">Utilisateurs</h5>
-          <div class="card-body">
-            <a class="nav-link" href="{{path('app_user_index')}}">Liste</a>
-            <a class="nav-link" href="{{path('app_register')}}">Créer</a>
+    <div class="row ">
+      <div class="d-flex py-5 rowadmin">
+        <!-- Page to create user | Only Admin Rules -->
+        {% if is_granted('ROLE_ADMIN') %}
+        <div class="row mx-3" style="width: 160px;">
+          <div class="card p-0">
+            <h5 class="card-header">Utilisateurs</h5>
+            <div class="card-body">
+              <!-- Redirect page to user list -->
+              <a class="nav-link" href="{{path('app_user_index')}}">Liste</a>
+              <!-- Redirect page to register page for user -->
+              <a class="nav-link" href="{{path('app_register')}}">Créer</a>
+            </div>
+          </div>
+        </div>
+        {% endif %}   
+        <!-- Page to create hour | Only Admin Rules -->
+        <div class="row mx-3" style="width: 160px;">
+          <div class="card p-0">
+            <h5 class="card-header">Services</h5>
+            <div class="card-body">
+              <!-- Redirect page to Services list -->
+              <a class="nav-link" href="{{path('app_service_list')}}">Liste</a>
+              <!-- Redirect page to create Services -->
+              <a class="nav-link" href="{{path('app_service_new')}}">Créer</a>
+            </div>
+          </div>
+        </div>
+        <!-- Page to create hour | Only Admin Rules -->
+        {% if is_granted('ROLE_ADMIN') %}
+        <div class="row mx-3" style="width: 160px;">
+          <div class="card p-0">
+            <h5 class="card-header">Horaires</h5>
+            <div class="card-body">
+              <!-- Redirect page to hour list -->
+              <a class="nav-link" href="{{path('app_hour_list')}}">Liste</a>
+              <!-- Redirect page to hour page -->
+              <a class="nav-link" href="{{path('app_hour_new')}}">Créer</a>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    
+      <div class="d-flex rowuser">
+        <!-- Page to create car | for user -->
+        <div class="row mx-3" style="width: 160px;">
+          <div class="card p-0">
+            <h5 class="card-header">Véhicules</h5>
+            <div class="card-body">
+              <!-- Redirect page to car list -->
+              <a class="nav-link" href="{{path('app_car_list')}}">Liste</a>
+              <!-- Redirect page to create car -->
+              <a class="nav-link" href="{{path('app_car_new')}}">Créer</a>      
+            </div>
+          </div>
+        </div>
+        
+        <!-- Page to create car | for user -->
+        <div class="row mx-3" style="width: 160px;">
+          <div class="card p-0">
+            <h5 class="card-header">Marque</h5>
+            <div class="card-body">
+              <!-- Redirect page to brand list -->
+              <a class="nav-link" href="{{path('app_brand_list')}}">Liste</a>
+              <!-- Redirect page to create brand -->
+              <a class="nav-link" href="{{path('app_brand_new')}}">Créer</a>      
+            </div>
+          </div>
+        </div>
+
+        <!-- Page to create car | for user -->
+        <div class="row mx-3" style="width: 160px;">
+          <div class="card p-0">
+            <h5 class="card-header">Modèle</h5>
+            <div class="card-body">
+              <!-- Redirect page to model list -->
+              <a class="nav-link" href="{{path('app_model_list')}}">Liste</a>
+                <!-- Redirect page to create model -->
+              <a class="nav-link" href="{{path('app_model_new')}}">Créer</a>      
+            </div>
+          </div>
+        </div>
+
+        <!-- Page to create color | for user -->
+        <div class="row mx-3" style="width: 160px;">
+          <div class="card p-0">
+            <h5 class="card-header">Couleurs</h5>
+            <div class="card-body">
+              <!-- Redirect page to color list -->
+              <a class="nav-link" href="{{path('app_color_list')}}">Liste</a>
+              <!-- Redirect page to create color -->
+              <a class="nav-link" href="{{path('app_color_new')}}">Créer</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page to create energy | for user -->
+        <div class="row mx-3" style="width: 160px;">
+          <div class="card p-0">
+            <h5 class="card-header">Energie</h5>
+            <div class="card-body">
+                <!-- Redirect page to energy list -->
+              <a class="nav-link" href="{{path('app_energy_list')}}">Liste</a>
+              <!-- Redirect page to create energy -->
+              <a class="nav-link" href="{{path('app_color_list')}}">Créer</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Page to create year | for user -->
+        <div class="row mx-3" style="width: 160px;">
+          <div class="card p-0">
+            <h5 class="card-header">Année</h5>
+            <div class="card-body">
+              <!-- Redirect page to year list -->
+              <a class="nav-link" href="{{path('app_year_list')}}">Liste</a>
+              <!-- Redirect page to create year -->
+              <a class="nav-link" href="{{path('app_year_new')}}">Créer</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page to create Equipement | for user -->
+        <div class="row mx-3" style="width: 160px;">
+          <div class="card p-0">
+            <h5 class="card-header">Equipement</h5>
+            <div class="card-body">
+              <!-- Redirect page to Equipement list -->
+              <a class="nav-link" href="{{path('app_equipment_list')}}">Liste</a>
+              <!-- Redirect page to create Equipement -->
+              <a class="nav-link" href="{{path('app_equipment_new')}}">Créer</a>
+            </div>
           </div>
         </div>
       </div>
-
-      {% endif %}    
-      <div class="row mx-3" style="width: 150px;">
-        <div class="card p-0">
-          <h5 class="card-header">Véhicules</h5>
-          <div class="card-body">
-            <a class="nav-link" href="{{path('app_car_list')}}">Liste</a>
-            <a class="nav-link" href="{{path('app_car_new')}}">Créer</a>      
+        <!-- Page to create Testimony | for user -->
+        <div class="d-flex py-5">
+          <div class="row mx-3" style="width: 160px;">
+            <div class="card p-0">
+              <h5 class="card-header">Témoignages</h5>
+              <div class="card-body">
+                <!-- Redirect page to Testimony list -->
+                <a class="nav-link" href="{{path('app_testimony_list')}}">Liste</a>
+                <!-- Redirect page to create Equipement -->
+                <a class="nav-link" href="{{path('app_testimony_new')}}">Créer</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      
-      
-      <div class="row mx-3" style="width: 150px;">
-        <div class="card p-0">
-          <h5 class="card-header">Marque</h5>
-          <div class="card-body">
-            <a class="nav-link" href="{{path('app_brand_list')}}">Liste</a>
-            <a class="nav-link" href="{{path('app_brand_new')}}">Créer</a>      
-          </div>
-        </div>
-      </div>
-
-      <div class="row mx-3" style="width: 150px;">
-        <div class="card p-0">
-          <h5 class="card-header">Modèle</h5>
-          <div class="card-body">
-            <a class="nav-link" href="{{path('app_model_list')}}">Liste</a>
-            <a class="nav-link" href="{{path('app_model_new')}}">Créer</a>      
-          </div>
-        </div>
-      </div>
-
-      <div class="row mx-3" style="width: 150px;">
-        <div class="card p-0">
-          <h5 class="card-header">Couleurs</h5>
-          <div class="card-body">
-            <a class="nav-link" href="{{path('app_color_list')}}">Liste</a>
-            <a class="nav-link" href="{{path('app_color_new')}}">Créer</a>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="row mx-3" style="width: 150px;">
-        <div class="card p-0">
-          <h5 class="card-header">Energie</h5>
-          <div class="card-body">
-            <a class="nav-link" href="{{path('app_energy_list')}}">Liste</a>
-            <a class="nav-link" href="{{path('app_color_list')}}">Créer</a>
-          </div>
-        </div>
-      </div>
-      
-
-      <div class="row mx-3" style="width: 150px;">
-        <div class="card p-0">
-          <h5 class="card-header">Année</h5>
-          <div class="card-body">
-            <a class="nav-link" href="{{path('app_year_list')}}">Liste</a>
-            <a class="nav-link" href="{{path('app_year_new')}}">Créer</a>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="row mx-3" style="width: 150px;">
-        <div class="card p-0">
-          <h5 class="card-header">Equipement</h5>
-          <div class="card-body">
-            <a class="nav-link" href="{{path('app_equipment_list')}}">Liste</a>
-            <a class="nav-link" href="{{path('app_equipment_new')}}">Créer</a>
-          </div>
-        </div>
-      </div>
-
-
-      {% if is_granted('ROLE_ADMIN') %}
-      <div class="row mx-3" style="width: 150px;">
-        <div class="card p-0">
-          <h5 class="card-header">Horaires</h5>
-          <div class="card-body">
-            <a class="nav-link" href="{{path('app_hour_list')}}">Liste</a>
-            <a class="nav-link" href="{{path('app_hour_new')}}">Créer</a>
-          </div>
-        </div>
-      </div>
-      {% endif %}
-      
-
-
-
-      <div class="row mx-3" style="width: 150px;">
-        <div class="card p-0">
-          <h5 class="card-header">Services</h5>
-          <div class="card-body">
-            <a class="nav-link" href="{{path('app_service_list')}}">Liste</a>
-            <a class="nav-link" href="{{path('app_service_new')}}">Créer</a>
-          </div>
-        </div>
-      </div>
-  </div>
-
-
-<!-- Section 
- -->
+    </div>
   </div>
 </main>         
 {% endblock %}

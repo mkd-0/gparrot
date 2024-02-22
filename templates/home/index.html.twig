@@ -63,7 +63,6 @@
     <div class="row d-flex row text-center mb-5">
       <h2>Notre priorité votre confiance</h2> 
     </div>
-    
     <!-- Avantages -->
     <div class="row d-flex mb-2 mx-auto"> 
       <!-- Row     -->
@@ -74,8 +73,7 @@
                 <i class="bi bi-credit-card-2-back mx-2"></i> Payez en toute sérénité et à votre rythme : CB, 4x sans frais.
             </p>
         </div>
-    
-        <!-- Col2     -->
+        <!-- Col2    -->
         <div class="col-md-6">  
           <p class="mx-5 mx-md-5 text-md-left">
               <i class="bi bi-car-front mx-2"></i> Des centaines de voitures d’occasion,
@@ -84,8 +82,6 @@
         </div>
       </div>  
     </div>
-
-
     <div class="row d-flex mb-2 mx-auto"> 
       <!-- Row   -->
       <div class="row d-flex mb-2"> 
@@ -97,7 +93,6 @@
               oui c'est possible !
             </p>
         </div>
-    
         <!-- Col2     -->
         <div class="col-md-6">  
           <p class="mx-5 mx-md-5 text-md-left">
@@ -107,8 +102,6 @@
         </div>
       </div>  
     </div>
-    
-
     <div class="row d-flex mb-2 mx-auto"> 
       <!-- Row    -->
       <div class="row d-flex mb-2"> 
@@ -119,7 +112,6 @@
             nous respecterons les délais.
             </p>
         </div>
-    
         <!-- Col2     -->
         <div class="col-md-6">  
           <p class="mx-5 mx-md-5 text-md-left">
@@ -128,70 +120,59 @@
           </p>
         </div>
       </div>  
-    </div>
-    
+    </div> 
       <!-- Row3 -->
-
     </div>
 
     <!-- End Avantage -->
 
 
  <!-- Section Testimonial -->
- <section class="home-testimonial py-5">
-  <!-- Title -->
-
-  <div class="row d-flex justify-content-center py-5">
-    <div class="col-md-12 pt-4 d-flex justify-content-center">
-      <h2>Témoignages</h2>
+  <section style="color: #000; background-color: #f3f2f2;">
+    <div class="container py-5">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-10 col-xl-8 text-center">
+          <h3 class="fw-bold mb-4">Témoignages</h3>
+        </div>
+      </div>
+    <!-- Testimonials cards -->
+      <div class="d-flex justify-content-center">
+          {% for testimony in testimonies | slice(-3, 3) %}
+            {% if testimony.isok == 'yes' %}
+            <div class="col-md-4 mb-4 mb-md-0 mx-3 text-center">
+              <div class="card">
+                <div class="card-body py-4 mt-2" style="height: 200px;">          
+                  <p class="mb-2 fs-5">
+                    <i class="fas fa-quote-left py-auto"></i> {{testimony.description}}
+                  </p>
+                  <h5 class="font-weight-bold pt-5">{{testimony.visitorname}}</h5>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          {% endfor %}      
+      </div>
     </div>
-  </div>
-  <!-- Testimonials -->
-  <div class="container">
-    <div class="row d-flex justify-content-center">
-
-       <!-- Testimonial 1 -->
-        <div class="col-md-4">
-          <div class="testi-desc">
-            <div class="border border-secondary-subtle text-center py-5 shadow p-3 mb-5 rounded">&ldquo;Merci pour vos conseils 
-             et votre professionnalisme&rdquo;
-              <p class="text-center mt-3">Nathalie M</p>
-            </div>                                                             
-          </div>  
-        </div>
-    
-          <!-- Testimonial 2 -->
-        <div class="col-md-4 ">
-          <div class="testi-desc">
-            <div class="border border-secondary-subtle text-center py-5 shadow p-3 mb-5 rounded">&ldquo;Travail efficace et 
-                délais respectés&rdquo;
-              <p class="text-center mt-3">Clément C</p>
-            </div>                                                             
-          </div>  
-        </div>
-
-          <!-- Testimonial 3 -->
-        <div class="col-md-4">
-          <div class="testi-desc">
-            <div class="border border-secondary-subtle text-center py-5 shadow p-3 mb-5 rounded">&ldquo;Voiture achetée et entretenue
-                      ici. Aucun soucis.&rdquo;
-              <p class="text-center mt-3">Bernard B</p>
-            </div>                                                             
-          </div>  
-        </div>
-    </div>
+   
     <!-- Add Testimonial  -->
-    <div class="row justify-content-start">
-      <p>Parce que votre avis compte, laissez nous le  témoignagne de votre expérience</p>
-      
-      <div class="d-grid gap-2 d-md-block">
+    <div class="d-flex flex-column align-items-center pb-5">
+      <div class="row align-item-center" style="width: auto;">
+        <p>Parce que votre avis compte, laissez nous le  témoignagne de votre expérience</p>
+      </div>
+      <!-- Form contact hide and show when click on button  -->
+      <div class="row r">
         <button id="btn_testimony" type="button" class="btn btn-primary">Je témoigne</button>
       </div>
     </div>
 
+ {# Affichage du formulaire #}
+ 
+ <div class="container">
 
-        <!-- Form Testimonial  -->
-    <div id="testimony">
+</div>
+
+    <!-- Form Testimonial  -->
+    <div id="testimony" style="display: none;">
         <div class="row ">
           <div class="mb-1 pt-5">
             <label for="name" class="form-label">Votre nom</label>
@@ -214,6 +195,11 @@
         </div>   
     </div>
 </section>
+
+  </section>
+
+
+    
 
 </div>
 <script src="{{ asset('js/testimony.js') }}"></script>
