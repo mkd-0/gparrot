@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Temoignage{% endblock %}
+
+{% block body %}
+    <!-- Title -->
+    <h1 class="px-5">Liste des témoignages</h1>
+    <!-- Datatable -->
+    <div class="ms-5 w-75 ">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>Description</th>
+                    <th>Nom </th>
+                    <th>Validé</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for testimony in testimonies %}
+                <tr>
+                    <td>{{ testimony.id }}</td>
+                    <td>{{ testimony.description }}</td>
+                    <td>{{ testimony.visitorname }}</td>
+                    <td>{{ testimony.isok ? 'Yes' : 'No' }}</td>
+                    <td>
+                        <!-- Button to redirect detail page -->
+                        <a href="{{ path('app_testimony_show', {'id': testimony.id}) }}" class="btn btn-info">Voir</a>
+                        <!-- Button to redirect edit page -->
+                        <a href="{{ path('app_testimony_edit', {'id': testimony.id}) }}" class="btn btn-warning">Modifier</a
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucune données</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!-- Button to redirect add page -->
+    <a href="{{ path('app_testimony_new') }}" class="btn btn-primary mb-5 mx-5" >Ajouter</a>
+    <!-- Button to go to back -->
+    <a href="{{ path('app_config') }}" class="btn btn-secondary  mb-5 mx-5">Retour</a>
+{% endblock %}

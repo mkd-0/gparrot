@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Témoignage{% endblock %}
+
+{% block body %}
+    <!-- Title -->
+    <h1 class="ms-5">Ajouter un témoignage</h1>
+
+    {{ include('admin/testimony/_form.html.twig') }}
+    <!-- Button to go to back -->
+    <a href="{{ path('app_testimony_list') }}" class="btn btn-secondary my-2 mx-5">Retour</a>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Témoignages{% endblock %}
+
+{% block body %}
+<!-- Title -->
+<h1 class="mx-5">Témoignages</h1>
+    <!-- Datable -->
+    <div class="ms-5 w-75">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>N°</th>
+                    <td>{{ testimony.id }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ testimony.description }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ testimony.visitorname }}</td>
+                </tr>
+                <tr>
+                    <th>Validé</th>
+                    <td>{{ testimony.isok ? 'Oui' : 'Non' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Button to go to back -->
+    <a href="{{ path('app_testimony_list') }}" class="btn btn-secondary mb-2 ms-5">Retour</a>
+    <!-- Button to redirect edit page -->
+    <a href="{{ path('app_testimony_edit', {'id': testimony.id}) }}" class="btn btn-warning mb-2">Modifier</a>
+    <!-- Button to delete -->
+    {{ include('admin/testimony/_delete_form.html.twig') }}
+{% endblock %}
