@@ -16,20 +16,19 @@ function getElementsAndAjaxCall() {
     const maxMileage = parseInt($('#slider-range-mileage-value2').val())
     const minYear = parseInt($('#slider-range-year-value1').val())
     const maxYear = parseInt($('#slider-range-year-value2').val())
-    $("#price-min").text(minPrice);
-    $("#price-max").text(maxPrice);
-    $("#mileage-min").text(minMileage);
-    $("#mileage-max").text(maxMileage);
-    $("#year-min").text(minYear);
-    $("#year-max").text(maxYear);
 
    getFilteredCars(minPrice, maxPrice, minMileage, maxMileage, minYear, maxYear)
     
     }
 
 
+
+
  function getFilteredCars(minPrice, maxPrice,
     minMileage, maxMileage, minYear, maxYear) {
+   console.log(minPrice +"/",maxPrice);
+   console.log(minMileage +"/",maxMileage);
+   console.log(minYear +"/",maxYear);
 
    $.ajax({
      url: '/admin/car/getFilteredCars',
@@ -43,28 +42,30 @@ function getElementsAndAjaxCall() {
        'maxYear': maxYear
      }
    }).done((response) => {
-   console.log(response);
-    filterCars(response.allCarIds, 
-        response.filteredCarsIds)
+   
+    filterCars(response['allCarIds'], 
+    response['filteredCarsIds'])
+     //filterCars(response.allCarIds, 
+    //    response.FilteredCarsIds)
    }).fail((error) => {
      alert("Une erreur est survenue lors du filtrage" . error)
    })
  }
  
- function filterCars(allCarIds, filteredCarsIds) {
+ function filterCars(allCarIds, FilteredCarsIds) {
    allCarIds.forEach((carId) => {
-    console.log(filteredCarsIds);
-    const carDiv = document.querySelector('[id="car-' + carId + '"]')
-   if(filteredCarsIds.length>0){
-    const containsObject = 
-    filteredCarsIds.some((obj) => obj.id == carId); 
-    if (containsObject) 
-    {
-     // if (FilteredCarsIds.includes(carId)) {  
+    console.log(carId);
+    console.log(FilteredCarsIds);
+     const carDiv = document.querySelector("#car-" + carId)
+     // const carDiv = document.querySelector('[id="car-' + carId + '"]')
+     //const containsObject = 
+     //FilteredCarsIds.some((obj) => obj.id === carId); 
+     //if (containsObject) 
+     //{
+      if (FilteredCarsIds.includes(carId)) {  
      carDiv.style.display = 'block'
      } else {
        carDiv.style.display = 'none'
      }
-    }
    })
  }

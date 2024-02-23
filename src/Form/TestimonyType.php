@@ -14,7 +14,9 @@ class TestimonyType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
+        $x = 1;
+        $builder = $builder
+
             ->add('visitorname', TextType::class, [
                 'attr' => ['class' => 'form-control'],
                 'label' => 'Votre nom'
@@ -23,9 +25,11 @@ class TestimonyType extends AbstractType
             ->add('description', TextareaType::class, [
                 'attr' => ['class' => 'form-control'],
                 'label' => 'Témoignage'
-            ])
+            ]);
 
-            ->add('isok', CheckboxType::class, [
+        // if (is_granted('ROLE_ADMIN'))
+        if ($x = 1)
+            $builder->add('isok', CheckboxType::class, [
                 'attr' => ['class' => 'form-check'],
                 'label' => 'Validé ',
                 'required' => false

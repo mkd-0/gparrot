@@ -6,96 +6,74 @@
 {% block body %}
 
 
-<div class="container-fluid">
+<div class="container-fluid p-0">
   <!-- Description -->
-  <div class="row  mt-4 w-75 mx-auto">
+  <div class="row mt-4 w-75 mx-auto">
     <h1 class="text-center">Nos occasions ({{cars|length}})</h1> 
-    <p>Plus de 2000 voitures en stocks, révisées et garanties. </br>
+    <p  class="text-center">Plus de 2000 voitures en stocks, révisées et garanties. </br>
       Choisissez parmi tous nos modèles.
     </p>  
   </div>
   <!-- End Description -->
 
   <!-- Filtre -->
-  <div class="slider-range">
-    <div class="slidecontainer d-flex justify-content-center ">
-      <div class="px-5">
-      <p>Prix min :</p>
-      <input type="range" id="slider-range-price-value1" min="100" max="25000" value="100">
-      <p>Prix max :</p>
-      <input type="range" id="slider-range-price-value2" min="100" max="35000" value="35000">
-    </div>
-    <div class="px-5">
-      <p>Kilomètre min :</p>
-      <input type="range" id="slider-range-mileage-value1" min="0" max="100000" value="0">
-      <p>Kilomètre max :</p>
-      <input type="range" id="slider-range-mileage-value2" min="0" max="100000" value="100000">
-    </div>
+  
+    <!-- SLIDER de filtrage V3 -->
+    <div class="row filter ms-5 mb-5 border border-primary">       
+        <!-- Filter price -->
+        <div class="col col-lg-4 border border-secondary mx-auto">
+          <div class="mx-auto">
+            <div class="range ms-5 my-2">
+                <label for="amount">Prix :</label>
+                <input type="text" id="amount" readonly style="border:0; color:#D92332; font-weight:bold; " > 
+            </div>
+            <div id="slider-range" class="ms-5 mb-5"  style="width:200px"></div>
+          </div>    
+        </div>
+        <!-- Filter mileage -->
+        <div class="col-lg-4 border border-secondary">
+            <div class="range ms-5 my-2">
+                <label for="mileage">Kilomètre :</label>
+                <input type="text" id="mileage" readonly style="border:0; color:#D92332; font-weight:bold; " > 
+            </div>
+            <div id="slider-range-mileage" class="ms-5 mb-5"  style="width:200px">
+            </div>
+        </div>
+          <!-- Filter year -->
+          <div class="col-lg-4 border border-secondary">
+            <div class="range ms-5 my-2">
+                <label for="year">Année :</label>
+                <input type="text" id="year" readonly style="border:0; color:#D92332; font-weight:bold; " > 
+            </div>
+            <div id="slider-range-year" class="ms-5 mb-5"  style="width:200px">
+            </div>
+        </div>
+    </div>     
+    <!-- END  -->
 
-    <div class="px-5">
-      <p>Année min :</p>
-      <input type="range" id="slider-range-year-value1" min="2010" max="2024" value="2010">
-      <p>Année max :</p>
-      <input type="range" id="slider-range-year-value2" min="2010" max="2024" value="2024">
-    </div>
-      
-    </div>
-</div>
-<!-- Mileage --> 
-   
-<!-- Year --> 
- 
-
-  </div>
-
- 
-  </div>
-      
-  <div id="filteredAds" class="container">
-          <!-- Les annonces filtrées seront affichées ici -->
-      
-
-  </div>
-
-
-  <!-- End Filtre  display none -->
-
-
-  <!-- Card -->
-  <div class="container d-flex">
-    <div class="row row-cols-xs1 row-cols-sm-3">
-      
+    <!-- Card -->
+    <div class="row row-cols-1 row-cols-md-3 g-4 mx-5" id="filteredResults">   
       {% for car in cars %}
-          <div class="card mx-5 my-5 p-0" id="car-{{car.id}}" style="width:25%;">
+      <div class="col">
+          <div class="card p-0" id="car-{{car.id}}">
             {% if car.imageName %}
-            <img src="{{vich_uploader_asset(car, 'imageFile') }}" alt="Image de la voiture" class="card-img-top" style="height: 250px;">
+            <img src="{{vich_uploader_asset(car, 'imageFile') }}" alt="Image de la voiture" class="card-img-top" height="75%">
             {% else %}
-            <img src="{{ asset('img/voiture0.jpg') }}" alt="pas d'image" class="card-img-top" style="height: 250px;">
+            <img src="{{ asset('img/logo_vparrot.png') }}" alt="voiture par défaut" class="card-img-top" height="75%">
             {% endif %}
-
-            
-            
             <div class="card-body">
               <h5 class="card-title my-1">{{car.brand}} {{car.model}}</h5>
               <p class="card-text my-1">{{car.energy}}</p>
               <p class="card-text my-1">Année : {{car.year}}</p>
               <p class="card-text my-1">{{car.mileage}} km</p>
               <p class="card-text my-1">{{car.price}} €</p>
-              <a href="{{ path('app_car_show', {'id': car.id}) }}" class="btn btn-danger d-flex justify-content-center">Détail</a>
-                      
+              <a href="{{ path('app_car_show', {'id': car.id}) }}" class="btn btn-danger d-flex justify-content-center">Détail</a>       
             </div>
           </div>
+        </div>
       {% endfor %}
     </div>
-  </div>
+
   <!-- End Card -->
 </div>
-
-
-
-
-
-
 {% endblock %}
-
-

@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Nullable;
+use PhpParser\Node\Expr\Cast\Double;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -22,13 +23,13 @@ class Car
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $Mileage = null;
+    private ?int $Mileage = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Power = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $Price = null;
+    private ?int $Price = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $DateCirculation = null;
@@ -76,17 +77,18 @@ class Car
         $this->picture = new ArrayCollection();
     }
 
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getMileage(): ?string
+    public function getMileage(): ?int
     {
         return $this->Mileage;
     }
 
-    public function setMileage(?string $Mileage): static
+    public function setMileage(?int $Mileage): static
     {
         $this->Mileage = $Mileage;
 
@@ -105,12 +107,12 @@ class Car
         return $this;
     }
 
-    public function getPrice(): ?string
+    public function getPrice(): ?int
     {
         return $this->Price;
     }
 
-    public function setPrice(?string $Price): static
+    public function setPrice(?int $Price): static
     {
         $this->Price = $Price;
 
@@ -129,6 +131,9 @@ class Car
         return $this;
     }
 
+    /**
+     * @Groups({"car"})
+     */
     public function getBrand(): ?Brand
     {
         return $this->brand;
@@ -141,6 +146,10 @@ class Car
         return $this;
     }
 
+
+    /**
+     * @Groups({"car"})
+     */
     public function getModel(): ?Model
     {
         return $this->Model;
@@ -153,6 +162,10 @@ class Car
         return $this;
     }
 
+
+    /**
+     * @Groups({"car"})
+     */
     public function getColor(): ?Color
     {
         return $this->Color;
@@ -165,6 +178,10 @@ class Car
         return $this;
     }
 
+
+    /**
+     * @Groups({"car"})
+     */
     public function getEnergy(): ?Energy
     {
         return $this->energy;

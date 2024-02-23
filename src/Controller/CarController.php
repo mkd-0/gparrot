@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route('/admin/car')]
 class CarController extends AbstractController
@@ -37,39 +38,39 @@ class CarController extends AbstractController
 
 
 
-    #[Route('/getFilteredCars', name: 'app_getFilteredCars', methods: ['GET'])]
-    public function getFilteredCars(Request $request, CarRepository $carRepository): JsonResponse
-    {
 
-        $minPrice = $request->query->get('minPrice');
-        $maxPrice = $request->query->get('maxPrice');
-        $minMileage = $request->query->get('minMileage');
-        $maxMileage = $request->query->get('maxMileage');
-        $minYear = $request->query->get('minYear');
-        $maxYear = $request->query->get('maxYear');
+    // #[Route('/getFilteredCars', name: 'app_getFilteredCars', methods: ['GET'])]
+    // public function getFilteredCars(Request $request, CarRepository $carRepository): JsonResponse
+    // {
 
-        //     // Récupérer les données filtrées depuis la requête
-        $repoFielteredCarIds = $carRepository->findFilteredCarsIds($minPrice, $maxPrice, $minMileage, $maxMileage, $minYear, $maxYear);
+    //     $minPrice = $request->query->get('minPrice');
+    //     $maxPrice = $request->query->get('maxPrice');
+    //     $minMileage = $request->query->get('minMileage');
+    //     $maxMileage = $request->query->get('maxMileage');
+    //     $minYear = $request->query->get('minYear');
+    //     $maxYear = $request->query->get('maxYear');
 
-        //     // Effectuez vos opérations de filtrage ici
-        //     // Supposons que $filteredData contient les données filtrées
-        //     // Par exemple, vous pouvez utiliser Doctrine pour récupérer les données filtrées depuis la base de données
-        $filteredCarIds  = [];
-        foreach ($repoFielteredCarIds as $filteredCarId) {
-            array_push($filteredCarIds, $filteredCarId['id']);
-        }
-        var_dump($repoFielteredCarIds);
-        die;
-        $allCardIds = [];
-        foreach ($carRepository->findAll() as $car) {
-            array_push($allCardIds, $car->getId());
-        }
-        // Renvoyer les données filtrées sous forme de réponse JSON
-        return $this->json([
-            'allCarIds' => $allCardIds,
-            'filteredCarsIds' => $filteredCarIds,
-        ]);
-    }
+    //     //     // Récupérer les données filtrées depuis la requête
+    //     //$repoFielteredCarIds = $carRepository->findFilteredCarsIds($minPrice, $maxPrice, $minMileage, $maxMileage, $minYear, $maxYear,);
+    //     $repoFielteredCarIds = $carRepository->findFilteredCarsIds($minPrice, $maxPrice);
+    //     //     // Effectuez vos opérations de filtrage ici
+    //     //     // Supposons que $filteredData contient les données filtrées
+    //     //     // Par exemple, vous pouvez utiliser Doctrine pour récupérer les données filtrées depuis la base de données
+    //     $filteredCarIds  = [];
+    //     foreach ($repoFielteredCarIds as $filteredCarId) {
+    //         array_push($filteredCarIds, $filteredCarId);
+    //     }
+
+    //     $allCardIds = [];
+    //     foreach ($carRepository->findAll() as $car) {
+    //         array_push($allCardIds, $car->getId());
+    //     }
+    //     // Renvoyer les données filtrées sous forme de réponse JSON
+    //     return $this->json([
+    //         'allCarIds' => $allCardIds,
+    //         'filteredCarsIds' => $filteredCarIds,
+    //     ]);
+    // }
 
 
     #[Route('/', name: 'app_car_list', methods: ['GET'])]

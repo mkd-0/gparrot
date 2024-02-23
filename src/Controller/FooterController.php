@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class FooterController extends AbstractController
 {
-    #[Route('/footer-content', name: 'footer_content')]
+    #[Route('/footer', name: 'footer_content')]
     public function index(EntityManagerInterface $entityManager): Response
     {
         $hours = $entityManager->getRepository(Hour::class)->findAll();

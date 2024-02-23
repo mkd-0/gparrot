@@ -165,8 +165,17 @@
       </div>
     </div>
 
- {# Affichage du formulaire #}
+ {# ******************************     Affichage du formulaire #}
  
+ {{ form_start(form, {'attr': {'style': 'width: 30%;'}}) }}
+ {{ form_row(form.visitorname) }}
+ {{ form_row(form.description) }}
+ {% if is_granted('ROLE_USERS') %}
+ {{ form_row(form.isok) }}
+ {% endif %} 
+
+<button class="btn btn btn-success my-2">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}
  <div class="container">
 
 </div>

@@ -1,0 +1,91 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Parrot
+{% endblock %}
+
+{% block stylesheets %}      
+
+{% endblock %}
+
+{% block body %}
+
+
+<h1 class="text-center">Filtrage des annonces de voitures par prix</h1>
+    <!-- Champs d'entrée pour spécifier le prix minimum et maximum -->
+    <div class="text-center">
+    <label for="minPriceInput">Prix minimum:</label>
+    <input type="number" id="minPriceInput" name="minPriceInput">
+    
+    <label for="maxPriceInput">Prix maximum:</label>
+    <input type="number" id="maxPriceInput" name="maxPriceInput">
+    
+    <!-- Bouton de filtrage -->
+    <button id="filterButton">Filtrer</button>
+    <!-- END  -->
+
+    <!-- SLIDER  de filtrage V2 -->
+    <div class="mt-5">
+        <h3>Filtre V2</h3>
+        <div>
+            <label for="priceRange">Filtrer par prix :</label>
+        </div>
+        <div>
+            <input type="range" id="priceRange" min="0" max="100000" step="1000">
+        </div>
+        <div>
+            <span id="minPrice">0</span> - <span id="maxPrice">100000</span> euros
+        </div>
+    </div>
+    </div>
+    <!-- END  -->
+
+
+     <!-- SLIDER de filtrage V3 -->
+     <div class="container ms-5 mb-5">
+        <h3>Filtre V3</h3>
+            
+        <div class="row">
+            <!-- Filter price -->
+            <div class="col">
+                <div class="ms-5">
+                    <label for="amount">Prix:</label>
+                    <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold; " > 
+                </div>
+                <div id="slider-range" class="ms-5 mb-5"  style="width:200px">
+                </div>
+            </div> 
+
+
+            <!-- Filter mileage -->
+            <div class="col">
+                <div class="ms-5">
+                    <label for="amount">Prix:</label>
+                    <input type="text" id="amount-mileage" readonly style="border:0; color:#f6931f; font-weight:bold; " > 
+                </div>
+                <div id="slider-range-mileage" class="ms-5 mb-5"  style="width:200px">
+                </div>
+            </div>
+        </div>     
+    </div>
+
+
+    <!-- END  -->
+        
+
+
+    <!-- Zone pour afficher les résultats d'origine -->
+    <div id="filteredResults" style="background-color: rgb(115, 115, 115)" height: "100px";  >
+        <div id="ListCar d-flex justify-content-center">
+            <p class="ms-5">Résultats d'origine = Liste de toutes les voitures</p>
+            {% for car in cars %}
+            <div class="border border-primary m-5 text-center" style="width: 200px;">
+                <p>{{ car.brand }} {{ car.model }} - {{ car.price }} euros</p> 
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

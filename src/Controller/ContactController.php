@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Hour;
 use App\Entity\Contact;
 use App\Form\ContactType;
 use Doctrine\ORM\EntityManager;
@@ -16,6 +17,9 @@ class ContactController extends AbstractController
     #[Route('/contact', name: 'app_contact')]
     public function index(Request $request, EntityManagerInterface $manager): Response
     {
+        $hours = $manager->getRepository(Hour::class)->findAll();
+
+
 
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
@@ -41,6 +45,7 @@ class ContactController extends AbstractController
 
         return $this->render('home/contact.html.twig', [
             'form' => $form->createView(),
+            'hours' => $hours
         ]);
     }
 }

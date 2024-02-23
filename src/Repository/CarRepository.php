@@ -21,35 +21,37 @@ class CarRepository extends ServiceEntityRepository
         parent::__construct($registry, Car::class);
     }
 
+    /***********************************************
+     * Trouve les annonces de voitures dans une plage de prix donnée.
+     *
+     * @param int|null $minPrice Le prix minimum
+     * @param int|null $maxPrice Le prix maximum
+     * @return Car[] Liste des annonces de voitures filtrées par prix
+     */
 
-    public function findFilteredCarsIds(
-        $minPrice,
-        $maxPrice,
-        $minMileage,
-        $maxMileage,
-        $minYear,
-        $maxYear
-    ): array {
-        $query = $this->createQueryBuilder('c');
-        return $query->select('c.id')
-            ->where('c.Price BETWEEN :minPrice AND :maxPrice')
-            //->andWhere('c.Price < :maxPrice')
-            // ->andWhere('c.Mileage >= :minMileage')
-            // ->andWhere('c.Mileage <= :maxMileage')
-            // ->andWhere('c.Year >= :minYear')
-            // ->andWhere('c.Year <= :maxYear')
-            ->setParameter('minPrice', $minPrice)
-            ->setParameter('maxPrice', $maxPrice)
-            // ->setParameter('minMileage', $minMileage)
-            // ->setParameter('maxMileage', $maxMileage)
-            // ->setParameter('minYear', $minYear)
-            // ->setParameter('maxYear', $maxYear)
+    // Méthode pour filtrer les voitures en fonction d'une plage de prix
+    //public function findByPriceRange($minPrice, $maxPrice, $minMileage, $maxMileage)
+    public function findByPriceRange($minPrice, $maxPrice, $minMileage, $maxMileage, $minYear, $maxYear)
+    {
+        return $this->createQueryBuilder('c')
+            ->innerJoin('c.Year', 'cy')
+            ->where('c.Price >= :minPrice')
+            ->andWhere('c.Price <= :maxPrice')
+            ->andWhere('c.Mileage >= :minMileage')
+            ->andWhere('c.Mileage <= :maxMileage')
+            ->andWhere('cy.name >= :minYear')
+            ->andWhere('cy.name <= :maxYear')
+            ->setParameters([
+                'minPrice' => $minPrice,
+                'maxPrice' => $maxPrice,
+                'minMileage' => $minMileage,
+                'maxMileage' => $maxMileage,
+                'minYear' => $minYear,
+                'maxYear' => $maxYear,
+            ])
             ->getQuery()
             ->getResult();
     }
-
-
-
 
 
     //    /**
@@ -58,7 +60,7 @@ class CarRepository extends ServiceEntityRepository
     //    public function findByExampleField($value): array
     //    {
     //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
+    //            ->andWhere('c.exampleField = :val)
     //            ->setParameter('val', $value)
     //            ->orderBy('c.id', 'ASC')
     //            ->setMaxResults(10)

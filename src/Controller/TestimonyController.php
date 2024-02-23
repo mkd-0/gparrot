@@ -41,10 +41,11 @@ class TestimonyController extends AbstractController
             return $this->redirectToRoute('app_testimony_list', [], Response::HTTP_SEE_OTHER);
         }
 
+
         // Si la requête n'est pas une soumission POST ou si le formulaire n'est pas valide,
         // afficher la vue avec le formulaire
-        // return $this->render('admin/testimony/new.html.twig',
-        return $this->render('new.html.twig', [
+        return $this->render('admin/testimony/new.html.twig', [
+            //return $this->render('home/index.html.twig', [
             'testimony' => $testimony,
             //'form' => $form,
             'form' => $form->createView(), // Passer le formulaire à la vue
