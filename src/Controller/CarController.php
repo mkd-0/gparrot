@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Car;
 use App\Form\CarType;
+use App\Entity\Hour;
 use App\Repository\CarRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,6 +20,7 @@ class CarController extends AbstractController
     #[Route('/new', name: 'app_car_new', methods: ['GET', 'POST'])]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         $car = new Car();
         $form = $this->createForm(CarType::class, $car);
         $form->handleRequest($request);
@@ -33,66 +35,36 @@ class CarController extends AbstractController
         return $this->render('admin/car/new.html.twig', [
             'car' => $car,
             'form' => $form,
+            'hours' => $hours,
         ]);
     }
 
 
-
-
-    // #[Route('/getFilteredCars', name: 'app_getFilteredCars', methods: ['GET'])]
-    // public function getFilteredCars(Request $request, CarRepository $carRepository): JsonResponse
-    // {
-
-    //     $minPrice = $request->query->get('minPrice');
-    //     $maxPrice = $request->query->get('maxPrice');
-    //     $minMileage = $request->query->get('minMileage');
-    //     $maxMileage = $request->query->get('maxMileage');
-    //     $minYear = $request->query->get('minYear');
-    //     $maxYear = $request->query->get('maxYear');
-
-    //     //     // Récupérer les données filtrées depuis la requête
-    //     //$repoFielteredCarIds = $carRepository->findFilteredCarsIds($minPrice, $maxPrice, $minMileage, $maxMileage, $minYear, $maxYear,);
-    //     $repoFielteredCarIds = $carRepository->findFilteredCarsIds($minPrice, $maxPrice);
-    //     //     // Effectuez vos opérations de filtrage ici
-    //     //     // Supposons que $filteredData contient les données filtrées
-    //     //     // Par exemple, vous pouvez utiliser Doctrine pour récupérer les données filtrées depuis la base de données
-    //     $filteredCarIds  = [];
-    //     foreach ($repoFielteredCarIds as $filteredCarId) {
-    //         array_push($filteredCarIds, $filteredCarId);
-    //     }
-
-    //     $allCardIds = [];
-    //     foreach ($carRepository->findAll() as $car) {
-    //         array_push($allCardIds, $car->getId());
-    //     }
-    //     // Renvoyer les données filtrées sous forme de réponse JSON
-    //     return $this->json([
-    //         'allCarIds' => $allCardIds,
-    //         'filteredCarsIds' => $filteredCarIds,
-    //     ]);
-    // }
-
-
     #[Route('/', name: 'app_car_list', methods: ['GET'])]
-    public function index(CarRepository $carRepository): Response
+    public function index(CarRepository $carRepository, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         return $this->render('admin/car/list.html.twig', [
             'cars' => $carRepository->findAll(),
+            'hours' => $hours,
         ]);
     }
 
 
     #[Route('/{id}', name: 'app_car_show', methods: ['GET'])]
-    public function show(Car $car): Response
+    public function show(Car $car, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         return $this->render('admin/car/show.html.twig', [
             'car' => $car,
+            'hours' => $hours,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_car_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Car $car, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         $form = $this->createForm(CarType::class, $car);
         $form->handleRequest($request);
 
@@ -105,6 +77,7 @@ class CarController extends AbstractController
         return $this->render('admin/car/edit.html.twig', [
             'car' => $car,
             'form' => $form,
+            'hours' => $hours,
         ]);
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Hour;
 use App\Entity\Model;
 use App\Form\ModelType;
 use App\Repository\ModelRepository;
@@ -15,16 +16,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class ModelController extends AbstractController
 {
     #[Route('/', name: 'app_model_list', methods: ['GET'])]
-    public function index(ModelRepository $modelRepository): Response
+    public function index(ModelRepository $modelRepository, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         return $this->render('admin/model/list.html.twig', [
             'models' => $modelRepository->findAll(),
+            'hours' => $hours,
+
         ]);
     }
 
     #[Route('/new', name: 'app_model_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         $model = new Model();
         $form = $this->createForm(ModelType::class, $model);
         $form->handleRequest($request);
@@ -39,20 +44,26 @@ class ModelController extends AbstractController
         return $this->render('admin/model/new.html.twig', [
             'model' => $model,
             'form' => $form,
+            'hours' => $hours,
+
         ]);
     }
 
     #[Route('/{id}', name: 'app_model_show', methods: ['GET'])]
-    public function show(Model $model): Response
+    public function show(Model $model, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         return $this->render('admin/model/show.html.twig', [
             'model' => $model,
+            'hours' => $hours,
+
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_model_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Model $model, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         $form = $this->createForm(ModelType::class, $model);
         $form->handleRequest($request);
 
@@ -65,6 +76,8 @@ class ModelController extends AbstractController
         return $this->render('admin/model/edit.html.twig', [
             'model' => $model,
             'form' => $form,
+            'hours' => $hours,
+
         ]);
     }
 

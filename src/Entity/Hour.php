@@ -19,7 +19,7 @@ class Hour
     #[ORM\Column(length: 255)]
     private ?string $morning = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $afternoon = null;
 
     public function getId(): ?int

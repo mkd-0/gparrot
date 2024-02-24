@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Year;
+use App\Entity\Hour;
 use App\Form\YearType;
 use App\Repository\YearRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,16 +16,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class YearController extends AbstractController
 {
     #[Route('/', name: 'app_year_list', methods: ['GET'])]
-    public function index(YearRepository $yearRepository): Response
+    public function index(YearRepository $yearRepository, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         return $this->render('admin/year/list.html.twig', [
             'years' => $yearRepository->findAll(),
+            'hours' => $hours,
         ]);
     }
 
     #[Route('/new', name: 'app_year_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         $year = new Year();
         $form = $this->createForm(YearType::class, $year);
         $form->handleRequest($request);
@@ -39,12 +43,14 @@ class YearController extends AbstractController
         return $this->render('admin/year/new.html.twig', [
             'year' => $year,
             'form' => $form,
+            'hours' => $hours,
         ]);
     }
 
     #[Route('/{id}', name: 'app_year_show', methods: ['GET'])]
-    public function show(Year $year): Response
+    public function show(Year $year, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         return $this->render('admin/year/show.html.twig', [
             'year' => $year,
         ]);
@@ -53,6 +59,7 @@ class YearController extends AbstractController
     #[Route('/{id}/edit', name: 'app_year_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Year $year, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         $form = $this->createForm(YearType::class, $year);
         $form->handleRequest($request);
 
@@ -65,6 +72,7 @@ class YearController extends AbstractController
         return $this->render('admin/year/edit.html.twig', [
             'year' => $year,
             'form' => $form,
+            'hours' => $hours,
         ]);
     }
 

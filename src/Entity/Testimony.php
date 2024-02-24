@@ -20,7 +20,7 @@ class Testimony
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $visitorname = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?bool $isok = null;
 
     public function getId(): ?int

@@ -19,13 +19,13 @@ class ModelType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'attr' => ['class' => 'form-control'],
-                'label' => 'Nom'
+                'label' => 'Modèle'
             ])
 
             ->add('brand', EntityType::class, [
                 'class' => Brand::class,
                 'choice_label' => 'name',
-                'label' => 'Nom',
+                'label' => 'Marque',
                 'attr' => ['class' => 'form-control']
 
             ]);

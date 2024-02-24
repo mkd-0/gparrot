@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Hour;
 use App\Entity\Contact;
 use App\Form\ContactType;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,9 +36,7 @@ class ContactController extends AbstractController
                 'Votre message a bien été envoyé !'
             );
 
-
-
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_contact');
         }
 
 

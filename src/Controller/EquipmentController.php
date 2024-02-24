@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Hour;
 use App\Entity\Equipment;
 use App\Form\EquipmentType;
 use App\Repository\EquipmentRepository;
@@ -15,16 +16,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class EquipmentController extends AbstractController
 {
     #[Route('/', name: 'app_equipment_list', methods: ['GET'])]
-    public function index(EquipmentRepository $equipmentRepository): Response
+    public function index(EquipmentRepository $equipmentRepository, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         return $this->render('admin/equipment/list.html.twig', [
             'equipment' => $equipmentRepository->findAll(),
+            'hours' => $hours,
         ]);
     }
 
     #[Route('/new', name: 'app_equipment_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         $equipment = new Equipment();
         $form = $this->createForm(EquipmentType::class, $equipment);
         $form->handleRequest($request);
@@ -39,20 +44,26 @@ class EquipmentController extends AbstractController
         return $this->render('admin/equipment/new.html.twig', [
             'equipment' => $equipment,
             'form' => $form,
+            'hours' => $hours,
         ]);
     }
 
     #[Route('/{id}', name: 'app_equipment_show', methods: ['GET'])]
-    public function show(Equipment $equipment): Response
+    public function show(Equipment $equipment, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
+
         return $this->render('admin/equipment/show.html.twig', [
             'equipment' => $equipment,
+            'hours' => $hours,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_equipment_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Equipment $equipment, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
+
         $form = $this->createForm(EquipmentType::class, $equipment);
         $form->handleRequest($request);
 
@@ -65,6 +76,7 @@ class EquipmentController extends AbstractController
         return $this->render('admin/equipment/edit.html.twig', [
             'equipment' => $equipment,
             'form' => $form,
+            'hours' => $hours,
         ]);
     }
 

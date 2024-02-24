@@ -1,6 +1,6 @@
 let togg1 = document.getElementById("btn_testimony");
 
-let d1 = document.getElementById("testimony");
+let testimony = document.getElementById("testimony");
 
 togg1.addEventListener("click", () => {
   if(getComputedStyle(testimony).display != "block"){

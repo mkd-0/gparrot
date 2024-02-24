@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Energy;
 use App\Form\EnergyType;
+use App\Entity\Hour;
 use App\Repository\EnergyRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,16 +16,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class EnergyController extends AbstractController
 {
     #[Route('/', name: 'app_energy_list', methods: ['GET'])]
-    public function index(EnergyRepository $energyRepository): Response
+    public function index(EnergyRepository $energyRepository, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         return $this->render('admin/energy/list.html.twig', [
             'energies' => $energyRepository->findAll(),
+            'hours' => $hours,
         ]);
     }
 
     #[Route('/new', name: 'app_energy_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
+
         $energy = new Energy();
         $form = $this->createForm(EnergyType::class, $energy);
         $form->handleRequest($request);
@@ -39,20 +44,26 @@ class EnergyController extends AbstractController
         return $this->render('admin/energy/new.html.twig', [
             'energy' => $energy,
             'form' => $form,
+            'hours' => $hours,
         ]);
     }
 
     #[Route('/{id}', name: 'app_energy_show', methods: ['GET'])]
-    public function show(Energy $energy): Response
+    public function show(Energy $energy, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
+
         return $this->render('admin/energy/show.html.twig', [
             'energy' => $energy,
+            'hours' => $hours,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_energy_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Energy $energy, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
+
         $form = $this->createForm(EnergyType::class, $energy);
         $form->handleRequest($request);
 
@@ -65,6 +76,7 @@ class EnergyController extends AbstractController
         return $this->render('admin/energy/edit.html.twig', [
             'energy' => $energy,
             'form' => $form,
+            'hours' => $hours,
         ]);
     }
 

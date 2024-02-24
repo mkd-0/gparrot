@@ -4,20 +4,20 @@
 
 {% block body %}
     <h1 class="mx-5">Energie : {{ energy.name }} </h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ energy.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ energy.name }}</td>
-            </tr>
-        </tbody>
-    </table>
-
+    <div class="ms-5 w-75">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ energy.id }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ energy.name }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <a href="{{ path('app_energy_list') }}" class="btn btn-secondary mb-2 ms-5">Retour</a>
 
     <a href="{{ path('app_energy_edit', {'id': energy.id}) }}"  class="btn btn-warning mb-2">Modifier</a>

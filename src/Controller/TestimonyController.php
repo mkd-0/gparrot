@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Testimony;
+use App\Entity\Hour;
 use App\Form\TestimonyType;
 use App\Repository\TestimonyRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,21 +16,29 @@ use Symfony\Component\Routing\Annotation\Route;
 class TestimonyController extends AbstractController
 {
     #[Route('/', name: 'app_testimony_list', methods: ['GET'])]
-    public function index(TestimonyRepository $testimonyRepository): Response
+    public function index(TestimonyRepository $testimonyRepository, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         return $this->render('admin/testimony/list.html.twig', [
             'testimonies' => $testimonyRepository->findAll(),
+            'hours' => $hours,
         ]);
     }
 
     #[Route('/new', name: 'app_testimony_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         // Création d'une nouvelle instance de l'entité Testimony
         $testimony = new Testimony();
 
         // Création du formulaire en utilisant TestimonyType et l'entité Testimony
-        $form = $this->createForm(TestimonyType::class, $testimony);
+        // Vérifiez si l'utilisateur est administrateur
+
+        $form = $this->createForm(TestimonyType::class, $testimony, [
+
+            'hours' => $hours,
+        ]);
 
         // Traitement du formulaire lorsqu'une requête POST est soumise
         $form->handleRequest($request);
@@ -38,7 +47,7 @@ class TestimonyController extends AbstractController
             $entityManager->persist($testimony);
             $entityManager->flush();
             // Rediriger vers une autre page après l'enregistrement réussi
-            return $this->redirectToRoute('app_testimony_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_testimony_list', [], Response::HTTP_SEE_OTHER[]);
         }
 
 
@@ -53,16 +62,19 @@ class TestimonyController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_testimony_show', methods: ['GET'])]
-    public function show(Testimony $testimony): Response
+    public function show(Testimony $testimony, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         return $this->render('admin/testimony/show.html.twig', [
             'testimony' => $testimony,
+            'hours' => $hours,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_testimony_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Testimony $testimony, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         $form = $this->createForm(TestimonyType::class, $testimony);
         $form->handleRequest($request);
 
@@ -75,6 +87,7 @@ class TestimonyController extends AbstractController
         return $this->render('admin/testimony/edit.html.twig', [
             'testimony' => $testimony,
             'form' => $form,
+            'hours' => $hours,
         ]);
     }
 

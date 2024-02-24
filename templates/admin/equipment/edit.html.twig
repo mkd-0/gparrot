@@ -1,13 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Equipment{% endblock %}
+{% block title %}Equipement{% endblock %}
 
 {% block body %}
-    <h1>Edit Equipment</h1>
+<h1 class="ms-5">Modifier l'équipement</h1>
 
-    {{ include('equipment/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('admin/equipment/_form.html.twig', {'button_label': 'Enregistrer'}) }}
 
-    <a href="{{ path('app_equipment_index') }}">back to list</a>
-
-    {{ include('equipment/_delete_form.html.twig') }}
+    <a href="{{ path('app_equipment_list') }}" class="btn btn-secondary mb-5 ms-5 ">Retour</a>
+    {{ include('admin/equipment/_delete_form.html.twig') }}
 {% endblock %}

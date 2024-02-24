@@ -18,7 +18,7 @@ class FooterController extends AbstractController
         $hours = $entityManager->getRepository(Hour::class)->findAll();
 
         return $this->render('_partials/_footer.html.twig', [
-            'hours' => $hours
+            'hours' => $hours,
         ]);
     }
 }

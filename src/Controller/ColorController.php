@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Hour;
 use App\Entity\Color;
 use App\Form\ColorType;
 use App\Repository\ColorRepository;
@@ -15,16 +16,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class ColorController extends AbstractController
 {
     #[Route('/', name: 'app_color_list', methods: ['GET'])]
-    public function index(ColorRepository $colorRepository): Response
+    public function index(ColorRepository $colorRepository, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         return $this->render('/admin/color/list.html.twig', [
             'colors' => $colorRepository->findAll(),
+            'hours' => $hours,
+
         ]);
     }
 
     #[Route('/new', name: 'app_color_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         $color = new Color();
         $form = $this->createForm(ColorType::class, $color);
         $form->handleRequest($request);
@@ -39,20 +44,24 @@ class ColorController extends AbstractController
         return $this->render('/admin/color/new.html.twig', [
             'color' => $color,
             'form' => $form,
+            'hours' => $hours,
         ]);
     }
 
     #[Route('/{id}', name: 'app_color_show', methods: ['GET'])]
-    public function show(Color $color): Response
+    public function show(Color $color, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         return $this->render('/admin/color/show.html.twig', [
             'color' => $color,
+            'hours' => $hours,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_color_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Color $color, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         $form = $this->createForm(ColorType::class, $color);
         $form->handleRequest($request);
 
@@ -65,6 +74,7 @@ class ColorController extends AbstractController
         return $this->render('/admin/color/edit.html.twig', [
             'color' => $color,
             'form' => $form,
+            'hours' => $hours,
         ]);
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Hour;
 use App\Entity\Brand;
 use App\Form\BrandType;
 use App\Repository\BrandRepository;
@@ -15,16 +16,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class BrandController extends AbstractController
 {
     #[Route('/', name: 'app_brand_list', methods: ['GET'])]
-    public function index(BrandRepository $brandRepository): Response
+    public function index(BrandRepository $brandRepository, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
+
         return $this->render('admin/brand/list.html.twig', [
             'brands' => $brandRepository->findAll(),
+            'hours' => $hours
         ]);
     }
 
     #[Route('/new', name: 'app_brand_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         $brand = new Brand();
         $form = $this->createForm(BrandType::class, $brand);
         $form->handleRequest($request);
@@ -39,20 +44,24 @@ class BrandController extends AbstractController
         return $this->render('admin/brand/new.html.twig', [
             'brand' => $brand,
             'form' => $form,
+            'hours' => $hours,
         ]);
     }
 
     #[Route('/{id}', name: 'app_brand_show', methods: ['GET'])]
-    public function show(Brand $brand): Response
+    public function show(Brand $brand, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         return $this->render('admin/brand/show.html.twig', [
             'brand' => $brand,
+            'hours' => $hours,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_brand_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Brand $brand, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         $form = $this->createForm(BrandType::class, $brand);
         $form->handleRequest($request);
 
@@ -65,12 +74,15 @@ class BrandController extends AbstractController
         return $this->render('admin/brand/edit.html.twig', [
             'brand' => $brand,
             'form' => $form,
+            'hours' => $hours,
         ]);
     }
 
     #[Route('/{id}', name: 'app_brand_delete', methods: ['POST'])]
     public function delete(Request $request, Brand $brand, EntityManagerInterface $entityManager): Response
     {
+
+
         if ($this->isCsrfTokenValid('delete' . $brand->getId(), $request->request->get('_token'))) {
             $entityManager->remove($brand);
             $entityManager->flush();

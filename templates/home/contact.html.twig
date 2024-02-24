@@ -7,7 +7,14 @@
 
   <div class="d-flex flex-column align-items-center ">
      <h1 class="">Formulaire de contact</h1>
-     
+     {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}">
+              {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    
      {{form(form,  {'attr': {'style': 'width:400px;'}}) }}
   </div>
   

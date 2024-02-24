@@ -17,18 +17,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    // public function index(EntityManagerInterface $entityManager): Response
-    // {
-    //     $services = $entityManager->getRepository(Service::class)->findAll();
-    //     $testimonies = $entityManager->getRepository(Testimony::class)->findAll();
-
-    //     return $this->render('home/index.html.twig', [
-
-    //         'services' => $services,
-    //         'testimonies' => $testimonies
-    //     ]);
-    // }
-
 
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -57,7 +45,7 @@ class HomeController extends AbstractController
             $entityManager->persist($testimony);
             $entityManager->flush();
             // Rediriger vers une autre page après l'enregistrement réussi
-            return $this->redirectToRoute('app_testimony_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
 
 
@@ -71,7 +59,7 @@ class HomeController extends AbstractController
             //'injection des datas de Service & Testimony
             'services' => $services,
             'testimonies' => $testimonies,
-            'hours' => $hours
+            'hours' => $hours,
 
         ]);
     }

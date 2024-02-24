@@ -137,20 +137,31 @@
       </div>
     <!-- Testimonials cards -->
       <div class="d-flex justify-content-center">
-          {% for testimony in testimonies | slice(-3, 3) %}
-            {% if testimony.isok == 'yes' %}
-            <div class="col-md-4 mb-4 mb-md-0 mx-3 text-center">
-              <div class="card">
-                <div class="card-body py-4 mt-2" style="height: 200px;">          
-                  <p class="mb-2 fs-5">
-                    <i class="fas fa-quote-left py-auto"></i> {{testimony.description}}
-                  </p>
-                  <h5 class="font-weight-bold pt-5">{{testimony.visitorname}}</h5>
-                </div>
-              </div>
+       {# Filtrer les témoignages validés #}
+{% set validated_testimonies = [] %}
+{% for testimony in testimonies %}
+    {% if testimony.isok == "yes" %}
+        {% set validated_testimonies = validated_testimonies|merge([testimony]) %}
+    {% endif %}
+{% endfor %}
+
+{# Trier les témoignages validés par leur ID #}
+{% set sorted_testimonies = validated_testimonies|sort((a, b) => b.id <=> a.id)|slice(0, 3) %}
+
+{# Afficher les trois derniers témoignages validés triés par leur ID #}
+{% for testimony in sorted_testimonies %}
+    <div class="col-md-4 mb-4 mb-md-0 mx-3 text-center">
+        <div class="card">
+            <div class="card-body py-4 mt-2" style="height: 200px;">          
+                <p class="mb-2 fs-5">
+                    <i class="py-auto"></i> {{ testimony.description }}
+                </p>
+                <h5 class="font-weight-bold pt-5">{{ testimony.visitorname }}</h5>
             </div>
-            {% endif %}
-          {% endfor %}      
+        </div>
+    </div>
+{% endfor %}
+         
       </div>
     </div>
    
@@ -165,47 +176,25 @@
       </div>
     </div>
 
- {# ******************************     Affichage du formulaire #}
+ {# {% if is_granted('ROLE_USER') %} {% endif %} ******************************     Affichage du formulaire #}
+ <div id="testimony" class="row mx-auto" style="display: none;">
+  
+    <div class="col mx-auto pb-5" style="width: 50%;">
+        {{ form_start(form) }}
+        {{ form_row(form.visitorname) }}
+        {{ form_row(form.description) }}
+        <button class="btn btn-success my-2">{{ button_label|default('Enregistrer') }}</button>
+        {{ form_end(form) }}
+    </div>
+  </div>
  
- {{ form_start(form, {'attr': {'style': 'width: 30%;'}}) }}
- {{ form_row(form.visitorname) }}
- {{ form_row(form.description) }}
- {% if is_granted('ROLE_USERS') %}
- {{ form_row(form.isok) }}
- {% endif %} 
-
-<button class="btn btn btn-success my-2">{{ button_label|default('Enregistrer') }}</button>
-{{ form_end(form) }}
- <div class="container">
-
-</div>
 
     <!-- Form Testimonial  -->
-    <div id="testimony" style="display: none;">
-        <div class="row ">
-          <div class="mb-1 pt-5">
-            <label for="name" class="form-label">Votre nom</label>
-            <input type="name" class="form-control" id="name" placeholder="Votre nom">
-          </div>
-          <div class="mb-1 py-2">
-            <label for="email" class="form-label">Votre email</label>
-            <input type="email" class="form-control" id="email" placeholder="Votre nom">
-          </div>
-          
-
-          <div class="mb-3">
-              <label for="message" class="form-label">Votre témoignage</label>
-              <textarea class="form-control" id="message" placeholder="Merci de travail" rows="3"></textarea>
-          </div>
-          <div class="d-grid gap-2 md-flex justify-content-md-center">
-            <button type="button" class="btn btn-primary">Envoyer le message</button>
-          </div>
-
-        </div>   
-    </div>
+    
+      
 </section>
 
-  </section>
+  
 
 
     

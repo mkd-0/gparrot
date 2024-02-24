@@ -64,40 +64,42 @@ $(function() {
         maxYear = $("#slider-range-year").slider("values", 1);
         $("#year").val(minYear + " - " + maxYear);
 
-  });
-
 
 // Filtre avec le SLIDER V3 
- window.addEventListener("mouseup", (e) => {
-     FiltreCar();
+window.addEventListener("mouseup", (e) => {
+  FiltreCar();
 });
 
-    function FiltreCar() { 
-    minPrice = $("#slider-range").slider("values", 0);
-    maxPrice = $("#slider-range").slider("values", 1);
-    minMileage = $("#slider-range-mileage").slider("values", 0);
-    maxMileage = $("#slider-range-mileage").slider("values", 1);
-    minYear = $("#slider-range-year").slider("values", 0);
-    maxYear = $("#slider-range-year").slider("values", 1);
-  
+ function FiltreCar() { 
+ minPrice = $("#slider-range").slider("values", 0);
+ maxPrice = $("#slider-range").slider("values", 1);
+ minMileage = $("#slider-range-mileage").slider("values", 0);
+ maxMileage = $("#slider-range-mileage").slider("values", 1);
+ minYear = $("#slider-range-year").slider("values", 0);
+ maxYear = $("#slider-range-year").slider("values", 1);
 
-    $.ajax({
-        url: '/loadcar/',
-        type: 'GET',
-        //data: { minPrice: minPrice, maxPrice: maxPrice,minMileage:minMileage,maxMileage:maxMileage},
-        data: { minPrice: minPrice, maxPrice: maxPrice, minMileage:minMileage, maxMileage:maxMileage, minYear:minYear, maxYear:maxYear },
-        success: function(data) {
+
+ $.ajax({
+     url: '/loadcar/',
+     type: 'GET',
+     //data: { minPrice: minPrice, maxPrice: maxPrice,minMileage:minMileage,maxMileage:maxMileage},
+     data: { minPrice: minPrice, maxPrice: maxPrice, minMileage:minMileage, maxMileage:maxMileage, minYear:minYear, maxYear:maxYear },
+     success: function(data) {
+     
+     console.log(data)
+         // Mettre à jour l'interface utilisateur avec les résultats filtrés
+         // (Assuming you have a function to render the results)
+       $('#filteredResults').html(data);
+     },
+     error: function(xhr, status, error) {
         
-        console.log(data)
-            // Mettre à jour l'interface utilisateur avec les résultats filtrés
-            // (Assuming you have a function to render the results)
-          $('#filteredResults').html(data);
-        },
-        error: function(xhr, status, error) {
-           
-        }
-    });
+     }
+  });
 }
+});
+
+
+
 
 
 

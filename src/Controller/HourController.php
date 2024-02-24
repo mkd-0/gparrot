@@ -15,16 +15,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class HourController extends AbstractController
 {
     #[Route('/', name: 'app_hour_list', methods: ['GET'])]
-    public function index(HourRepository $hourRepository): Response
+    public function index(HourRepository $hourRepository, EntityManagerInterface $entityManager): Response
     {
+
         return $this->render('admin/hour/list.html.twig', [
             'hours' => $hourRepository->findAll(),
+
         ]);
     }
 
     #[Route('/new', name: 'app_hour_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         $hour = new Hour();
         $form = $this->createForm(HourType::class, $hour);
         $form->handleRequest($request);
@@ -39,14 +42,18 @@ class HourController extends AbstractController
         return $this->render('admin/hour/new.html.twig', [
             'hour' => $hour,
             'form' => $form,
+            'hours' => $hours,
+
         ]);
     }
 
     #[Route('/{id}', name: 'app_hour_show', methods: ['GET'])]
-    public function show(Hour $hour): Response
+    public function show(Hour $hour, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         return $this->render('admin/hour/show.html.twig', [
             'hour' => $hour,
+            'hours' => $hours,
         ]);
     }
 
@@ -55,6 +62,7 @@ class HourController extends AbstractController
     #[Route('/{id}/edit', name: 'app_hour_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Hour $hour, EntityManagerInterface $entityManager): Response
     {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
         $form = $this->createForm(HourType::class, $hour);
         $form->handleRequest($request);
 
@@ -67,6 +75,7 @@ class HourController extends AbstractController
         return $this->render('admin/hour/edit.html.twig', [
             'hour' => $hour,
             'form' => $form,
+            'hours' => $hours,
         ]);
     }
 

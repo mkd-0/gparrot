@@ -23,7 +23,7 @@
                     <td>{{ testimony.id }}</td>
                     <td>{{ testimony.description }}</td>
                     <td>{{ testimony.visitorname }}</td>
-                    <td>{{ testimony.isok ? 'Yes' : 'No' }}</td>
+                    <td>{{ testimony.isok ? 'Oui' : 'Non' }}</td>
                     <td>
                         <!-- Button to redirect detail page -->
                         <a href="{{ path('app_testimony_show', {'id': testimony.id}) }}" class="btn btn-info">Voir</a>
