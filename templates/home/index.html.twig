@@ -5,76 +5,60 @@
 
 
 {% block body %}
-<div class="container-fluid px-0" >
-  <!-- Content -->
-  <!-- Image -->
-  <div class="row  ">
-    <img src="{{ asset('img/section1img.png') }}" alt="Description de l'image" class="img-fluid">
-  </div>
-
-
-  <!-- Description -->
-  <div class="row  mt-4 w-75 mx-auto">
-    <h1 class="text-center">Présentation du garage</h1> 
-    <p>Vincent Parrot, fort de ses 15 années d'expérience dans la réparation automobile,
-      a ouvert son propre garage à Toulouse en 2021. 
-     Nous proposons une large gamme de services: réparation de la carrosserie et de la mécanique  des voitures ainsi que leur entretien régulier pour garantir leur performance et leur sécurité. 
-     
-    Nous mettons également en vente des véhicules d'occasion en parfait état, révisés et garantis.
-    </p>  
-  </div>
-  <!-- End Description -->
-
-
-    <!-- Section Service -->
-    <div class="row mt-5 bg-light">     
-      <div class="section1 mb-5">
-          <!-- Title -->
-        <div class="row d-flex row text-center my-5 ">
-          <h2>Nos services</h2> 
-        </div>
-      </div>
-  
-        <!-- Cards -->
-        <div class="container d-flex justify-content-center">
-          <div class="row row-cols-xs1 row-cols-sm-3 my-5">
-            {% for service in services %}
-        
-          <!-- Card mechanic -->
-            <div class="card mx-5 mb-5 p-0" style="width: 30rem;">
-              <img src="{{vich_uploader_asset(service, 'imageFile') }}"  class="card-img-top" style="height: 300px;" alt="service mécanique.">
-              <div class="card-body">
-                <h2 class="card-text my-1">{{service.title}}</h2>  
-                <p class="card-text">{{service.Description}}.</p>
-              </div>
-            </div>
-          {% endfor %}
-          </div>
-        </div>
+<div class="container-fluid no-gutters" ><!-- Content -->
+  <section class=""><!-- Image -->
+    <div class="row no-gutters"> 
+      <div class="col p-0">
+      <img src="{{ asset('img/img_section.png') }}" class="img-fluid" alt="Description de l'image" >
+      </div> 
     </div>
-        <!-- End Cards -->
-</div>
+  </section>
+  <section class="mx-0 px-0"><!-- Presentation -->
+    <div class="row no-gutters mt-4 w-75 mx-auto" >
+      <div class="col ">
+        <h1 class="text-center">Présentation du garage</h1> 
+        <p>Vincent Parrot, fort de ses 15 années d'expérience dans la réparation automobile,
+           a ouvert son propre garage à Toulouse en 2021. 
+           Nous proposons une large gamme de services: réparation de la carrosserie et de la mécanique
+           des voitures ainsi que leur entretien régulier pour garantir leur performance et leur sécurité. 
+          Nous mettons également en vente des véhicules d'occasion en parfait état, révisés et garantis.
+        </p>  
+      </div>
+    </div>
+  </section> 
+  <section class="container-fluid no-gutters bg-light px-0"><!-- Service -->
+    <div class="row no-gutters mt-5 text-center">     
+      <div class="col d-flex row text-center my-5 "><!-- Title -->
+        <h2>Nos services</h2> 
+      </div>
+      <!-- Cards -->
+      <div class="row no-gutters row-cols-xs1 row-cols-sm-3 mx-0 px-0 d-flex justify-content-center">
+        {% for service in services %}
+          <div class="card mx-5 mb-5 p-0" style="width: 30rem;">
+            <img src="{{vich_uploader_asset(service, 'imageFile') }}"  class="card-img-top" style="height: 300px;" alt="service">
+            <div class="card-body">
+              <h2 class="card-text my-1">{{service.title}}</h2>  
+              <p class="card-text">{{service.Description}}.</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>  
 
-    <!-- End Service -->
-  
-  <!-- Section Avantage -->
-  <div class="section2 bg-danger text-white py-5">
-    <!-- Title -->
-    <div class="row d-flex row text-center mb-5">
+  <section class="no-gutters bg-danger text-white py-2 px-0 mx-0"><!-- Avantage -->
+    <div class="container py-5">
+    <div class="row no-gutters d-flex row text-center mb-5 mx-0"><!-- Title -->
       <h2>Notre priorité votre confiance</h2> 
     </div>
-    <!-- Avantages -->
-    <div class="row d-flex mb-2 mx-auto"> 
-      <!-- Row     -->
-      <div class="row d-flex mb-2"> 
-        <!-- Col1     -->
-        <div class="col-md-6">  
+    <div class="row d-flex mb-2 mx-auto"> <!-- Avantages -->
+      <div class="row d-flex mb-2 "> <!-- Row   -->
+        <div class="col-md-6">  <!-- Col1    -->
             <p class="mx-5 mx-md-5 text-md-left">
                 <i class="bi bi-credit-card-2-back mx-2"></i> Payez en toute sérénité et à votre rythme : CB, 4x sans frais.
             </p>
         </div>
-        <!-- Col2    -->
-        <div class="col-md-6">  
+        <div class="col-md-6">     <!-- Col2    -->
           <p class="mx-5 mx-md-5 text-md-left">
               <i class="bi bi-car-front mx-2"></i> Des centaines de voitures d’occasion,
               vous trouverez forcément la votre
@@ -82,19 +66,16 @@
         </div>
       </div>  
     </div>
-    <div class="row d-flex mb-2 mx-auto"> 
-      <!-- Row   -->
-      <div class="row d-flex mb-2"> 
-        <!-- Col1     -->
-        <div class="col-md-6">  
+    <div class="row no-guttersd-flex mb-2 mx-auto"> <!-- Row   -->
+      <div class="row no-gutters d-flex mb-2"> 
+        <div class="col-md-6">  <!-- Col1     -->
             <p class="mx-5 mx-md-5 text-md-left">
               <i class="bi bi-person mx-2"></i> Des conseillers disponibles avant, 
               pendant et après votre achat, 
               oui c'est possible !
             </p>
         </div>
-        <!-- Col2     -->
-        <div class="col-md-6">  
+        <div class="col-md-6">  <!-- Col2     -->
           <p class="mx-5 mx-md-5 text-md-left">
             <i class="bi bi-emoji-frown mx-2"></i>Une panne ? 
             Votre conseiller est là pour vous conseiller.
@@ -102,18 +83,15 @@
         </div>
       </div>  
     </div>
-    <div class="row d-flex mb-2 mx-auto"> 
-      <!-- Row    -->
-      <div class="row d-flex mb-2"> 
-        <!-- Col1     -->
-        <div class="col-md-6">  
+    <div class="row d-flex mb-2 mx-auto"> <!-- Row    -->
+      <div class="row d-flex mb-2">
+        <div class="col-md-6">  <!-- Col1     -->
             <p class="mx-5 mx-md-5 text-md-left">
               <i class="bi bi-clock mx-2"></i>Parce que vous avez besoin de votre voiture,
             nous respecterons les délais.
             </p>
         </div>
-        <!-- Col2     -->
-        <div class="col-md-6">  
+        <div class="col-md-6">  <!-- Col2     -->
           <p class="mx-5 mx-md-5 text-md-left">
             <i class="bi bi-star mx-2"></i>Un service 5é étoiles pour votre véhicule, 
             c’est le minimum que l’on puisse faire.
@@ -121,84 +99,63 @@
         </div>
       </div>  
     </div> 
-      <!-- Row3 -->
-    </div>
-
-    <!-- End Avantage -->
-
-
- <!-- Section Testimonial -->
-  <section style="color: #000; background-color: #f3f2f2;">
-    <div class="container py-5">
-      <div class="row d-flex justify-content-center">
-        <div class="col-md-10 col-xl-8 text-center">
-          <h3 class="fw-bold mb-4">Témoignages</h3>
+  </div><!-- End Avantage -->
+  <section class="bg-light"><!-- Testimonial -->
+    <div class="py-5 m-0">
+      <div class="row no-gutters d-flex justify-content-center mx-0 px-0">
+        <div class="col-md-4 col-xs-12 text-center">
+          <h3 class="mb-4" style="color: black;">Témoignages</h3>
         </div>
       </div>
-    <!-- Testimonials cards -->
-      <div class="d-flex justify-content-center">
-       {# Filtrer les témoignages validés #}
-{% set validated_testimonies = [] %}
-{% for testimony in testimonies %}
-    {% if testimony.isok == "yes" %}
-        {% set validated_testimonies = validated_testimonies|merge([testimony]) %}
-    {% endif %}
-{% endfor %}
-
-{# Trier les témoignages validés par leur ID #}
-{% set sorted_testimonies = validated_testimonies|sort((a, b) => b.id <=> a.id)|slice(0, 3) %}
-
-{# Afficher les trois derniers témoignages validés triés par leur ID #}
-{% for testimony in sorted_testimonies %}
-    <div class="col-md-4 mb-4 mb-md-0 mx-3 text-center">
-        <div class="card">
-            <div class="card-body py-4 mt-2" style="height: 200px;">          
-                <p class="mb-2 fs-5">
-                    <i class="py-auto"></i> {{ testimony.description }}
-                </p>
-                <h5 class="font-weight-bold pt-5">{{ testimony.visitorname }}</h5>
-            </div>
-        </div>
-    </div>
-{% endfor %}
-         
+      <div class="row no-gutters d-flex justify-content-center "> <!-- Testimonials cards -->
+          {% set validated_testimonies = [] %} {# Testimony Filter last 3  #}
+          {% for testimony in testimonies %}
+              {% if testimony.isok == "yes" %}
+                  {% set validated_testimonies = validated_testimonies|merge([testimony]) %}
+              {% endif %}
+          {% endfor %}
+          {# Sort of testimony by ID #}
+          {% set sorted_testimonies = validated_testimonies|sort((a, b) => b.id <=> a.id)|slice(0, 3) %}
+          {# Show the last 3 testimony by ID #}
+          {% for testimony in sorted_testimonies %}
+              <div class="col-md-3 text-center">
+                  <div class="card mx-auto my-2" style="width: 80%">
+                      <div class="card-body py-4 mx-1 mt-2" style="height:280px;">          
+                          <p class="align-self-center m-0" style="height: 150px;">
+                              <i class="py-auto"></i> {{ testimony.description }}
+                          </p>
+                          <h5 class="align-items-end font-weight-bold pt-5" style="height: 30px;">{{ testimony.visitorname }}</h5>
+                      </div>
+                  </div>
+              </div>
+          {% endfor %}                  
       </div>
     </div>
    
-    <!-- Add Testimonial  -->
-    <div class="d-flex flex-column align-items-center pb-5">
-      <div class="row align-item-center" style="width: auto;">
-        <p>Parce que votre avis compte, laissez nous le  témoignagne de votre expérience</p>
-      </div>
-      <!-- Form contact hide and show when click on button  -->
-      <div class="row r">
-        <button id="btn_testimony" type="button" class="btn btn-primary">Je témoigne</button>
-      </div>
-    </div>
+        <!-- Add Testimonial  -->
+        <div class="d-flex flex-column align-items-center pb-5">
+          <div class="row no-gutters text-center text-black" style="width: auto;">
+            <p>Parce que votre avis compte, laissez nous le  témoignage de votre expérience</p>
+          </div>
+          <!-- Form contact hide and show when click on button  -->
+          <div class="row r">
+            <button id="btn_testimony" type="button" class="btn btn-primary">Je témoigne</button>
+          </div>
+        </div>
 
- {# {% if is_granted('ROLE_USER') %} {% endif %} ******************************     Affichage du formulaire #}
- <div id="testimony" class="row mx-auto" style="display: none;">
-  
-    <div class="col mx-auto pb-5" style="width: 50%;">
-        {{ form_start(form) }}
-        {{ form_row(form.visitorname) }}
-        {{ form_row(form.description) }}
-        <button class="btn btn-success my-2">{{ button_label|default('Enregistrer') }}</button>
-        {{ form_end(form) }}
-    </div>
-  </div>
- 
-
-    <!-- Form Testimonial  -->
-    
+    {# {% if is_granted('ROLE_USER') %} {% endif %} ******************************     Affichage du formulaire #}
+    <div id="testimony" class="row mx-auto" style="display: none;">
       
+        <div class="col mx-auto pb-5 text-black" style="width: 50%;">
+            {{ form_start(form) }}
+            {{ form_row(form.visitorname) }}
+            {{ form_row(form.description) }}
+            <button class="btn btn-success my-2">{{ button_label|default('Enregistrer') }}</button>
+            {{ form_end(form) }}
+        </div>
+      </div>
+        <!-- Form Testimonial  -->
 </section>
-
-  
-
-
-    
-
 </div>
 <script src="{{ asset('js/testimony.js') }}"></script>
 
