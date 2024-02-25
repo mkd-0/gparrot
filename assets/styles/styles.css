@@ -4,16 +4,32 @@ body, html {
   height: 100%;
   display: flex;
   flex-direction: column;
+
 }
 
 .content {
   flex: 1;
 }
 
+
+p, a {
+  font-size: 14px;
+}
+
+
 .bg-custom-nav {
-    background-color: #262526; /* Couleur personnalisée */
-    
+    background-color: #262526; /* Couleur personnalisée 262526 */
+
+
   }
+
+
+  
+  .container-fluid{
+    --bs-gutter-x:0!important;
+    --bs-gutter-y:0!important;
+  }
+
 
 
 .full-width-image {
@@ -21,3 +37,29 @@ body, html {
     height: auto;
     display: block;
   }
+
+
+  
+.card-body-testimony {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+
+
+@media (min-width: 576px) { /* Breakpoint for screen > medium */
+    p, a {
+        font-size: 16px; 
+    }
+
+    .card-body {
+      width: 100%;
+  }
+
+  .toggle-icon {
+    color: rgb(255, 255, 255); /* Remplacez 'red' par la couleur de votre choix */
+  }
+  
+}
