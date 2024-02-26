@@ -29,35 +29,33 @@ class TestimonyController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $hours = $entityManager->getRepository(Hour::class)->findAll();
-        // Création d'une nouvelle instance de l'entité Testimony
+        // add new instance of entity Testimony
         $testimony = new Testimony();
 
-        // Création du formulaire en utilisant TestimonyType et l'entité Testimony
-        // Vérifiez si l'utilisateur est administrateur
+        // Create formulaire by TestimonyType and Testimony entity
+        // Verification il user = admin
 
         $form = $this->createForm(TestimonyType::class, $testimony, [
 
             'hours' => $hours,
         ]);
 
-        // Traitement du formulaire lorsqu'une requête POST est soumise
+        // Load form when request POST is submit
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            // Si le formulaire est soumis et valide, enregistrer les données
+            // If form is submit and ok, register the data
             $entityManager->persist($testimony);
             $entityManager->flush();
-            // Rediriger vers une autre page après l'enregistrement réussi
+            // Redirect to another route before saved is good
             return $this->redirectToRoute('app_testimony_list', [], Response::HTTP_SEE_OTHER[]);
         }
 
 
-        // Si la requête n'est pas une soumission POST ou si le formulaire n'est pas valide,
-        // afficher la vue avec le formulaire
+        // If the form request isnot a submit POST or form isnot good 
+        // show form
         return $this->render('admin/testimony/new.html.twig', [
-            //return $this->render('home/index.html.twig', [
             'testimony' => $testimony,
-            //'form' => $form,
-            'form' => $form->createView(), // Passer le formulaire à la vue
+            'form' => $form->createView(), // give form to vue
         ]);
     }
 
