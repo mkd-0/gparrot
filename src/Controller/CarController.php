@@ -51,15 +51,7 @@ class CarController extends AbstractController
     }
 
 
-    #[Route('/{id}', name: 'app_car_show', methods: ['GET'])]
-    public function show(Car $car, EntityManagerInterface $entityManager): Response
-    {
-        $hours = $entityManager->getRepository(Hour::class)->findAll();
-        return $this->render('admin/car/show.html.twig', [
-            'car' => $car,
-            'hours' => $hours,
-        ]);
-    }
+
 
     #[Route('/{id}/edit', name: 'app_car_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Car $car, EntityManagerInterface $entityManager): Response
