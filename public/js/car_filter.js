@@ -9,8 +9,8 @@ $(function() {
   $("#slider-range").slider({
     range: true,
     min: 0,
-    max: 35000,
-    values: [0, 35000],
+    max: 100000,
+    values: [0, 100000],
     slide: function(event, ui) {
       minPrice = ui.values[0]; // Mettre à jour la valeur minimale
       maxPrice = ui.values[1]; // Mettre à jour la valeur maximale
