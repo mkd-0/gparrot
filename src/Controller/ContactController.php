@@ -10,11 +10,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+
 
 class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'app_contact')]
-    public function index(Request $request, EntityManagerInterface $manager): Response
+    public function index(Request $request, EntityManagerInterface $manager, MailerInterface $mailer): Response
     {
         $hours = $manager->getRepository(Hour::class)->findAll();
 
@@ -29,6 +32,15 @@ class ContactController extends AbstractController
 
             $manager->persist($contact);
             $manager->flush($contact);
+
+
+            $email = (new Email())
+                ->from('soula216@gmail.com')
+                ->to('admin@parrot.fr')
+                ->subject('Time for Symfony Mailer!')
+                ->text('Sending emails is fun again!');
+
+            $mailer->send($email);
 
 
             $this->addFlash(
