@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 class OccasionController extends AbstractController
 {
     #[Route('/occasion', name: 'app_occasion')]
-    public function index(Request $request, EntityManagerInterface $entityManager, CarRepository $carRepository): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
         $hours = $entityManager->getRepository(Hour::class)->findAll();
 
@@ -25,6 +25,21 @@ class OccasionController extends AbstractController
             'hours' => $hours
         ]);
     }
+
+    #[Route('/occasion/car/{id}', name: 'app_car_show', methods: ['GET'])]
+    public function show(Car $car, EntityManagerInterface $entityManager): Response
+    {
+        $hours = $entityManager->getRepository(Hour::class)->findAll();
+
+
+        return $this->render('occasions/show.html.twig', [
+            'car' => $car,
+            'hours' => $hours,
+        ]);
+    }
+
+
+
 
 
     #[Route('/loadcar', name: 'loadcar', methods: ['GET'])]
@@ -38,7 +53,6 @@ class OccasionController extends AbstractController
         $maxYear = $request->query->get('maxYear');
 
         $query = $entityManager->getRepository(Car::class);
-        //$cars = $query->findByPriceRange($minPrice, $maxPrice, $minMileage, $maxMileage);
         $cars = $query->findByPriceRange($minPrice, $maxPrice, $minMileage, $maxMileage, $minYear, $maxYear);
 
         return $this->render('/filterajax.html.twig', [

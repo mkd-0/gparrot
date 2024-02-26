@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}véhicule{% endblock %}
+
+{% block body %}
+    <h1 class="mx-5">{{ car.Brand }} {{ car.Model }}</h1>
+    <div class="ms-5 w-75">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Kilométrage</th>
+                    <td>{{ car.Mileage }}</td>
+                </tr>
+                <tr>
+                    <th>Puissance</th>
+                    <td>{{ car.Power }} CV</td>
+                </tr>
+                <tr>
+                    <th>Date de circulation</th>
+                    <td>{{ car.DateCirculation ? car.DateCirculation|date('d-m-y') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Equipement</th>
+                    <td> {% for equipment in car.getEquipment() %}
+                        <li>{{ equipment.getName() }}</li>
+                        {% endfor %}</td>
+                </tr>
+                <tr>
+                    <th>Prix</th>
+                    <td>{{ car.Price }}  €</td>
+                </tr>
+                    {% if car.imageName %}
+                      <img src="{{vich_uploader_asset(car, 'imageFile') }}" alt="Image de la voiture" class="img-fluid" style="height: 200px;">
+                    {% endif %}
+            </tbody>            
+        </table>
+    </div>
+
+    <a href="{{ path('app_occasion') }}" class="btn btn-secondary mb-2 ms-5">Retour aux annonces</a>
+
+       
+    {% if is_granted('ROLE_USER') %}
+    <a href="{{ path('app_car_list') }}" class="btn btn-secondary mb-2 ms-5">Retour</a>
+    <a href="{{ path('app_car_edit', {'id': car.id}) }}" class="btn btn-warning mb-2">Modifier</a>
+
+    {{ include('admin/car/_delete_form.html.twig') }}
+    {% endif %}   
+{% endblock %}
