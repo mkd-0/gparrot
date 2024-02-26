@@ -4,7 +4,7 @@ body, html {
   height: 100%;
   display: flex;
   flex-direction: column;
-
+  
 }
 
 .content {
@@ -19,8 +19,6 @@ p, a {
 
 .bg-custom-nav {
     background-color: #262526; /* Couleur personnalisée 262526 */
-
-
   }
 
 
@@ -48,7 +46,6 @@ p, a {
 
 
 
-
 @media (min-width: 576px) { /* Breakpoint for screen > medium */
     p, a {
         font-size: 16px; 
@@ -59,7 +56,6 @@ p, a {
   }
 
   .toggle-icon {
-    color: rgb(255, 255, 255); /* Remplacez 'red' par la couleur de votre choix */
+    color: rgb(255, 255, 255); 
   }
-  
 }
