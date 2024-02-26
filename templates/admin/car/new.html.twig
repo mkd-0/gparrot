@@ -4,8 +4,6 @@
 
 {% block body %}
     <h1 class="px-5">Ajouter un véhicule</h1>
-
     {{ include('admin/car/_form.html.twig') }}
-
     <a href="{{ path('app_car_list') }}" class="btn btn-secondary mb-5 mx-5">Retour</a>
 {% endblock %}
